@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job | InternConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background">
+    <div id="page-content" class="min-h-screen flex flex-col">
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm border-b sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4">
+                <div id="header-content" class="flex justify-between items-center h-16">
+                    <!-- Dynamic Header -->
+                </div>
+            </div>
+        </header>
+
+        <main class="py-8 px-4 flex-grow">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <h1 class="section-title">Post a New Job</h1>
+                    <p class="section-subtitle">Fill out the form below to find your next great intern.</p>
+                </div>
+                
+                <div class="card p-8">
+                     <div id="form-message" class="hidden mb-4"></div>
+                    <form id="post-job-form" class="space-y-6">
+                        <div>
+                            <label for="title" class="label">Job Title</label>
+                            <input type="text" id="title" class="input" required placeholder="e.g., Frontend Developer Intern">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div>
+                                <label for="location" class="label">Location</label>
+                                <input type="text" id="location" class="input" required placeholder="e.g., San Francisco, CA or Remote">
+                            </div>
+                            <div>
+                                <label for="jobType" class="label">Job Type</label>
+                                <select id="jobType" class="input" required>
+                                    <option>Full-time</option>
+                                    <option>Part-time</option>
+                                </select>
+                            </div>
+                        </div>
+                         <div>
+                            <label for="salary" class="label">Salary (Optional)</label>
+                            <input type="text" id="salary" class="input" placeholder="e.g., $25/hour or $4,000/month">
+                        </div>
+                        <div>
+                            <label for="skills" class="label">Required Skills (comma-separated)</label>
+                            <input type="text" id="skills" class="input" required placeholder="e.g., HTML, CSS, JavaScript, React">
+                        </div>
+                        <div>
+                            <label for="description" class="label">Job Description</label>
+                            <textarea id="description" class="input min-h-[150px]" required placeholder="Describe the role, responsibilities, and qualifications..."></textarea>
+                        </div>
+                        <button type="submit" id="submit-button" class="btn btn-primary w-full !h-11">Post Job Listing</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-white border-t mt-auto">
+            <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+                <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="auth-header.js"></script>
+    <script type="module" src="post-job.js"></script>
+    <script src="animations.js" defer></script>
+</body>
+</html>

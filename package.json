@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^1.9.6"
+  },
+  "name": "internconnect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tw:init": "tailwindcss init"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

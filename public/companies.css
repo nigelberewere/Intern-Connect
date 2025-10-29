@@ -1,0 +1,325 @@
+/* --- Global & Variables --- */
+:root {
+    --primary: #6a5af9;
+    --primary-light: #8b7ffc;
+    --primary-dark: #4b32f8;
+    --background: #f7f5ff;
+    --foreground: #1e293b;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background); /* Fallback */
+    color: var(--foreground);
+    line-height: 1.6;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(247, 245, 255, 0.7); /* Reduced overlay opacity */
+    z-index: -1;
+}
+
+.video-background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#page-content {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background and overlay */
+}
+
+/* --- Job & Company Page Styles --- */
+.filter-input {
+    width: 100%;
+    height: 3rem;
+    padding: 0 1rem;
+    background-color: #fdfcff; 
+    border-radius: 0.75rem;
+    border: 1px solid var(--card-border);
+    transition: all 0.2s ease-in-out;
+    font-size: 0.875rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select.filter-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(106, 90, 249, 0.2);
+}
+
+
+/* --- General Site Styles --- */
+.hero-gradient {
+    background-color: var(--background);
+    background-image: radial-gradient(circle at top right, #e0e7ff 0%, var(--background) 50%);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--foreground);
+    margin-bottom: 1rem;
+}
+.section-subtitle {
+    font-size: 1.125rem;
+    color: #5a6474;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+.btn-lg {
+    height: 3rem;
+    padding: 0 2rem;
+    font-size: 1rem;
+}
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(106, 90, 249, 0.39);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+.btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--foreground);
+    border-color: var(--card-border);
+}
+.btn-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+}
+
+/* Links */
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4a5568;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+.nav-link:hover {
+    color: var(--primary);
+    opacity: 1;
+}
+.footer-link {
+     font-size: 0.875rem;
+     color: #4a5568;
+     transition: color 0.2s;
+}
+.footer-link:hover {
+    color: var(--primary);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.07),0 2px 4px -2px rgba(0,0,0,.05);
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+}
+.card-icon {
+    width: 4rem;
+    height: 4rem;
+    background-color: #eef2ff;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.card-title-sm {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+.card-description {
+    color: #5a6474;
+}
+
+/* Lists and Badges */
+.list-item {
+    padding: 1rem;
+    background-color: var(--background);
+    border-radius: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--card-border);
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+.status-yellow { background-color: #fef3c7; color: #92400e; }
+.status-blue { background-color: #dbeafe; color: #1e40af; }
+.status-green { background-color: #d1fae5; color: #065f46; }
+.status-gray { background-color: #f3f4f6; color: #374151; }
+.status-red { background-color: #fee2e2; color: #991b1b; }
+.status-purple { background-color: #ede9fe; color: #5b21b6; }
+
+
+/* --- Animations & Loader --- */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-fade-in {
+    transform: translateY(20px);
+}
+.animate-slide-in-up {
+    transform: translateY(30px);
+}
+.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.shimmer-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #e2e8f0; /* slate-200 */
+}
+
+.shimmer-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+/* Stat Cards for Dashboards */
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--card-border);
+}
+.stat-card p {
+    color: #64748b;
+}
+.stat-card .stat-number {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-top: 0.5rem;
+}
+.stat-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+}
+
+.input {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    border: 1px solid var(--card-border);
+    transition: all 0.2s;
+}
+.input:disabled {
+    background-color: #f8fafc; /* slate-50 */
+    cursor: not-allowed;
+}
+.input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(106, 90, 249, 0.2);
+}
+
+.skill-badge {
+    background-color: var(--primary-light);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+

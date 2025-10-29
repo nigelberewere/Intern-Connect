@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard | InternConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.6">
+</head>
+<body class="bg-background">
+    <div id="loader" class="fixed inset-0 bg-background z-50 flex justify-center items-center">
+        <!-- The initial spinner for auth check, skeleton loader will replace it for content loading -->
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div id="page-content" class="min-h-screen flex-col hidden">
+        <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-40 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4">
+                <div id="header-content" class="flex justify-between items-center h-16">
+                    <!-- Dynamic Header -->
+                </div>
+            </div>
+        </header>
+
+        <main class="py-8 px-4 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-8 animate-on-scroll animate-fade-in">
+                    <h1 id="welcome-message" class="text-3xl md:text-4xl font-bold text-foreground mb-1">Welcome!</h1>
+                    <p class="text-lg text-foreground/70">Here's an overview of your recruitment activity.</p>
+                </div>
+
+                <!-- Stat Cards -->
+                <div id="stats-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Skeleton or Stat cards will be injected here -->
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Main Content Column -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Recent Applicants -->
+                        <div id="recent-applicants-card" class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 400ms;">
+                             <!-- Content will be injected here -->
+                        </div>
+                         <!-- Active Listings -->
+                        <div id="active-listings-card" class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 500ms;">
+                            <!-- Content will be injected here -->
+                        </div>
+                    </div>
+                    <!-- Sidebar Column -->
+                    <div class="space-y-6">
+                        <div class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 600ms;">
+                             <h3 class="card-title-sm mb-4">Quick Actions</h3>
+                             <div class="space-y-3">
+                                 <a href="post-job.html" class="btn btn-primary w-full">Post a New Job</a>
+                                 <a href="company-profile.html" class="btn btn-secondary w-full">Update Company Profile</a>
+                             </div>
+                        </div>
+                        <div class="p-6 bg-primary/5 rounded-2xl border border-primary/10 animate-on-scroll animate-slide-in-up" style="animation-delay: 700ms;">
+                            <h3 class="font-semibold text-lg text-foreground mb-2">💡 Pro Tip</h3>
+                            <p class="text-sm text-foreground/80 leading-relaxed">Engage with applicants within 48 hours to secure the best talent for your roles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="bg-white border-t mt-auto">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <a class="flex items-center space-x-2" href="index.html">
+                             <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
+                            <span class="text-xl font-bold text-foreground">InternConnect</span>
+                        </a>
+                        <p class="text-sm text-foreground/60 mt-4">Your future starts here.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground">Navigate</h3>
+                        <ul class="mt-4 space-y-2">
+                             <li><a href="company-dashboard.html" class="footer-link">Dashboard</a></li>
+                            <li><a href="post-job.html" class="footer-link">Post a Job</a></li>
+                            <li><a href="company-profile.html" class="footer-link">Company Profile</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground">For Students</h3>
+                        <ul class="mt-4 space-y-2">
+                           <li><a href="jobs.html" class="footer-link">Browse Jobs</a></li>
+                           <li><a href="companies.html" class="footer-link">Browse Companies</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground">Resources</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="about.html" class="footer-link">About Us</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t pt-8 text-center">
+                    <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="auth-header.js"></script>
+    <script type="module" src="company-dashboard.js"></script>
+    <script src="animations.js" defer></script>
+</body>
+</html>

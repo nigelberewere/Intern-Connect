@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-ar">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | InternConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background">
+    <!-- Full screen loader -->
+    <div id="loader" class="fixed inset-0 bg-background z-50 flex justify-center items-center">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Page content, hidden by default -->
+    <div id="page-content" class="min-h-screen flex-col hidden">
+        <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200">
+            <div id="header-content" class="max-w-7xl mx-auto px-4">
+                 <!-- Dynamic Header -->
+            </div>
+        </header>
+
+        <main class="py-8 px-4 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-8 animate-on-scroll animate-fade-in">
+                    <h1 id="welcome-message" class="text-3xl md:text-4xl font-bold text-foreground mb-1">Welcome back!</h1>
+                    <p class="text-lg text-foreground/70">Here's what's happening with your internship journey.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Stat Card: Applications -->
+                    <div class="stat-card animate-on-scroll animate-slide-in-up" style="animation-delay: 0.1s;">
+                        <div class="flex justify-between items-center">
+                            <p>Applications</p>
+                            <div class="stat-icon bg-blue-100 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                        </div>
+                        <p id="applications-count" class="stat-number">0</p>
+                    </div>
+                    <!-- Stat Card: Interviews -->
+                    <div class="stat-card animate-on-scroll animate-slide-in-up" style="animation-delay: 0.2s;">
+                         <div class="flex justify-between items-center">
+                            <p>Interviews</p>
+                            <div class="stat-icon bg-yellow-100 text-yellow-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><line x1="10" x2="8" y1="9" y2="9"></line></svg>
+                            </div>
+                        </div>
+                        <p id="interviews-count" class="stat-number">0</p>
+                    </div>
+                    <!-- Stat Card: Offers -->
+                    <div class="stat-card animate-on-scroll animate-slide-in-up" style="animation-delay: 0.3s;">
+                        <div class="flex justify-between items-center">
+                            <p>Offers</p>
+                            <div class="stat-icon bg-green-100 text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        </div>
+                        <p id="offers-count" class="stat-number">0</p>
+                    </div>
+                    <!-- Stat Card: Profile Views -->
+                    <div class="stat-card animate-on-scroll animate-slide-in-up" style="animation-delay: 0.4s;">
+                        <div class="flex justify-between items-center">
+                            <p>Profile Views</p>
+                            <div class="stat-icon bg-purple-100 text-purple-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </div>
+                        </div>
+                        <p id="profile-views-count" class="stat-number">47</p>
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Profile Completion -->
+                        <div class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.5s;">
+                            <h3 class="card-title-sm mb-4">Profile Completion</h3>
+                             <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-foreground/80">85% Complete</span>
+                                <a href="profile.html" class="text-sm font-medium text-primary hover:underline">Complete Profile</a>
+                            </div>
+                            <div class="w-full bg-primary/10 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <!-- Recent Applications -->
+                        <div class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.6s;">
+                             <div class="flex justify-between items-center mb-4">
+                                <h3 class="card-title-sm">Recent Applications</h3>
+                                <a href="#" class="text-sm font-medium text-primary hover:underline">View All</a>
+                            </div>
+                            <div id="recent-applications-list" class="space-y-4">
+                                <!-- JS will populate this -->
+                                <p class="text-sm text-foreground/60">No recent applications.</p>
+                            </div>
+                        </div>
+                         <!-- Recommended For You -->
+                        <div class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.7s;">
+                             <div class="flex justify-between items-center mb-4">
+                                <h3 class="card-title-sm">Recommended for You</h3>
+                                <a href="jobs.html" class="text-sm font-medium text-primary hover:underline">Browse all jobs</a>
+                            </div>
+                            <div class="space-y-4">
+                                <!-- Recommendation Item -->
+                                <div class="flex items-center justify-between p-3 rounded-lg hover:bg-background transition-colors">
+                                    <div class="flex items-center gap-4">
+                                        <img src="https://placehold.co/40x40/E0E7FF/4F46E5?text=I" alt="Innovatech" class="rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-foreground">Backend Developer Intern</h4>
+                                            <p class="text-sm text-foreground/60">Innovatech - Austin, TX</p>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn btn-primary !h-9 !px-4">Apply</a>
+                                </div>
+                                <!-- Recommendation Item -->
+                                <div class="flex items-center justify-between p-3 rounded-lg hover:bg-background transition-colors">
+                                    <div class="flex items-center gap-4">
+                                         <img src="https://placehold.co/40x40/E0E7FF/4F46E5?text=S" alt="StartupXYZ" class="rounded-lg">
+                                        <div>
+                                            <h4 class="font-medium text-foreground">Full Stack Intern</h4>
+                                            <p class="text-sm text-foreground/60">StartupXYZ - Remote</p>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn btn-primary !h-9 !px-4">Apply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <!-- Upcoming Interviews -->
+                        <div class="card p-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.8s;">
+                             <h3 class="card-title-sm mb-4">Upcoming Interviews</h3>
+                             <div id="upcoming-interviews-list" class="space-y-3">
+                                 <!-- JS will populate this -->
+                                <p class="text-sm text-foreground/60">No upcoming interviews scheduled.</p>
+                             </div>
+                        </div>
+                        <!-- Quick Actions & Pro Tip -->
+                        <div class="space-y-6 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.9s;">
+                            <div class="card p-6">
+                                 <h3 class="card-title-sm mb-4">Quick Actions</h3>
+                                 <div class="space-y-3">
+                                     <a href="jobs.html" class="btn btn-primary w-full">Browse Jobs</a>
+                                     <a href="profile.html" class="btn btn-secondary w-full">Update Profile</a>
+                                 </div>
+                            </div>
+                            <div class="p-6 bg-primary/5 rounded-2xl border border-primary/10">
+                                <h3 class="font-semibold text-lg text-foreground mb-2">💡 Pro Tip</h3>
+                                <p class="text-sm text-foreground/80 leading-relaxed">Companies are 3x more likely to view complete profiles. Add your skills and projects!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="bg-white border-t mt-auto">
+             <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <a class="flex items-center space-x-2" href="index.html">
+                           <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
+                           <span class="text-xl font-bold text-foreground">InternConnect</span>
+                        </a>
+                        <p class="text-sm text-foreground/60 mt-4">Your future starts here.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">Quick Links</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="jobs.html" class="footer-link">Browse Jobs</a></li>
+                            <li><a href="companies.html" class="footer-link">Browse Companies</a></li>
+                            <li><a href="about.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Students</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="auth.html#signup" class="footer-link">Create Profile</a></li>
+                            <li><a href="student-dashboard.html" class="footer-link">Student Dashboard</a></li>
+                            <li><a href="resources.html" class="footer-link">Career Resources</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Companies</h3>
+                        <ul class="mt-4 space-y-2">
+                             <li><a href="auth.html#signup-company" class="footer-link">Post Jobs</a></li>
+                            <li><a href="company-dashboard.html" class="footer-link">Company Dashboard</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact Sales</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t pt-8 text-center">
+                    <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="student-dashboard.js"></script>
+    <script type="module" src="auth-header.js"></script>
+    <script src="animations.js" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Companies | InternConnect</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="companies.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+    <div class="video-background">
+        <video playsinline autoplay muted loop poster="https://png.pngtree.com/thumb_back/fh260/background/20201104/pngtree-technology-background-binary-computer-code-vector-design-image_458702.jpg">
+            <source src="https://png.pngtree.com/thumb_back/fh260/background/20201104/pngtree-technology-background-binary-computer-code-vector-design-image_458702.jpg" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="page-content" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200">
+            <div id="header-content" class="max-w-7xl mx-auto px-4">
+                <!-- Header populated by auth-header.js -->
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-12 px-4 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 animate-on-scroll animate-fade-in">
+                    <h1 class="section-title">Discover Amazing Companies</h1>
+                    <p class="section-subtitle">Explore top companies offering internship opportunities and find your perfect match.</p>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 border animate-on-scroll animate-fade-in">
+                    <div class="grid md:grid-cols-4 gap-4 items-center">
+                        <div class="relative md:col-span-1">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                            <input id="search-input" type="text" class="filter-input pl-12" placeholder="Search companies...">
+                        </div>
+                        <select id="industry-filter" class="filter-input">
+                            <option value="">All Industries</option>
+                            <option>Technology</option>
+                            <option>Data Analytics</option>
+                            <option>Design</option>
+                            <option>Marketing</option>
+                            <option>Cloud Services</option>
+                        </select>
+                         <select id="size-filter" class="filter-input">
+                            <option value="">Company Size</option>
+                            <option>1-10 employees</option>
+                            <option>11-50 employees</option>
+                            <option>51-200 employees</option>
+                            <option>201-500 employees</option>
+                            <option>501-1000 employees</option>
+                            <option>1000+ employees</option>
+                        </select>
+                         <select id="location-filter" class="filter-input">
+                            <option value="">All Locations</option>
+                            <option>San Francisco, CA</option>
+                            <option>New York, NY</option>
+                            <option>Austin, TX</option>
+                             <option>Los Angeles, CA</option>
+                             <option>Harare, Zimbabwe</option>
+                            <option>Seattle, WA</option>
+                            <option>Boston, MA</option>
+                            <option>Remote</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="companies-count" class="text-xl font-semibold text-foreground">Loading companies...</h2>
+                    <select id="sort-filter" class="filter-input !h-11 !w-auto">
+                        <option value="default">Sort by relevance</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+                
+                <div id="companies-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Skeleton loaders or company cards will be dynamically inserted here -->
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button id="load-more-btn" class="btn btn-secondary hidden">Load More Companies</button>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-white border-t">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <a class="flex items-center space-x-2" href="index.html">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
+                            <span class="text-xl font-bold text-foreground">InternConnect</span>
+                        </a>
+                        <p class="text-sm text-foreground/60 mt-4">Your future starts here.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">Quick Links</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="jobs.html" class="footer-link">Browse Jobs</a></li>
+                            <li><a href="companies.html" class="footer-link">Browse Companies</a></li>
+                            <li><a href="about.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Students</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="auth.html#signup" class="footer-link">Create Profile</a></li>
+                            <li><a href="student-dashboard.html" class="footer-link">Student Dashboard</a></li>
+                            <li><a href="resources.html" class="footer-link">Career Resources</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Companies</h3>
+                        <ul class="mt-4 space-y-2">
+                             <li><a href="auth.html#signup-company" class="footer-link">Post Jobs</a></li>
+                            <li><a href="company-dashboard.html" class="footer-link">Company Dashboard</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact Sales</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t pt-8 text-center">
+                    <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script type="module" src="companies.js"></script>
+    <script type="module" src="auth-header.js"></script>
+    <script src="animations.js" defer></script>
+
+</body>
+</html>
+

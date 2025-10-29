@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | InternConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+
+    <!-- Background Video -->
+    <div class="auth-video-bg">
+        <video autoplay muted loop id="auth-video">
+            <source src="https://media.istockphoto.com/id/1368943001/video/colorful-abstract-wavy-line-motion-background-colorful-techy-dot-line-animation.mp4?s=mp4-640x640-is&k=20&c=jr2MJKJf2_v6mEe59HzUyWrqNAek1u84KGwpIU5tOP8=" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+
+    <div class="auth-container" id="container">
+        <!-- Sign Up Form Container -->
+        <div class="form-container sign-up-container">
+            <form id="signup-form" class="auth-form">
+                <h1 class="auth-h1">Create Account</h1>
+                <div class="auth-tabs">
+                    <button type="button" id="student-tab" class="auth-tab active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="auth-tab-icon"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+                        Student
+                    </button>
+                    <button type="button" id="company-tab" class="auth-tab">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="auth-tab-icon"><rect width="20" height="20" x="2" y="2" rx="2" ry="2"></rect><path d="M8 6h8"></path><path d="M8 12h8"></path><path d="M8 18h4"></path></svg>
+                        Company
+                    </button>
+                </div>
+                
+                <div id="error-message-signup" class="auth-error"></div>
+
+                <!-- Student Sign Up Fields -->
+                <div id="student-fields" class="form-fields">
+                    <input type="text" id="firstName" placeholder="First Name" class="auth-input" required />
+                    <input type="text" id="lastName" placeholder="Last Name" class="auth-input" required />
+                    <input type="email" id="studentEmail" placeholder="Email" class="auth-input" required />
+                    <input type="password" id="studentPassword" placeholder="Password" class="auth-input" required />
+                    <input type="password" id="studentConfirmPassword" placeholder="Confirm Password" class="auth-input" required />
+                </div>
+
+                <!-- Company Sign Up Fields -->
+                <div id="company-fields" class="form-fields hidden">
+                    <input type="text" id="companyName" placeholder="Company Name" class="auth-input" required />
+                    <input type="text" id="companyWebsite" placeholder="Website (e.g., https://company.com)" class="auth-input" required />
+                    <input type="email" id="companyEmail" placeholder="Work Email" class="auth-input" required />
+                    <input type="password" id="companyPassword" placeholder="Password" class="auth-input" required />
+                    <input type="password" id="companyConfirmPassword" placeholder="Confirm Password" class="auth-input" required />
+                </div>
+
+                <button type="submit" class="auth-button">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Sign In Form Container -->
+        <div class="form-container sign-in-container">
+            <form id="login-form" class="auth-form">
+                <h1 class="auth-h1">Sign In</h1>
+                <div id="error-message-login" class="auth-error"></div>
+                <input type="email" id="loginEmail" placeholder="Email" class="auth-input" required />
+                <input type="password" id="loginPassword" placeholder="Password" class="auth-input" required />
+                <a href="#" class="auth-a">Forgot your password?</a>
+                <button type="submit" class="auth-button">Sign In</button>
+            </form>
+        </div>
+
+        <!-- Overlay Container -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1 class="auth-h1">Welcome Back!</h1>
+                    <p class="auth-p">Already have an account? Sign in to access your dashboard and continue your journey.</p>
+                    <button class="auth-button ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1 class="auth-h1">Create an Account</h1>
+                    <p class="auth-p">Join our community of innovators and start discovering your next opportunity today!</p>
+                    <button class="auth-button ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="auth.js"></script>
+</body>
+</html>

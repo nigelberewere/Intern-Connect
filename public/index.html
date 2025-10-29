@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternConnect | Your Future Starts Here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- This script loads the Tailwind CSS framework, which is needed for the site's styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 
+      This link tells the browser to load our stylesheet.
+      The "?v=1.3" is a cache-busting query. It forces the browser 
+      to re-download the file if it has an older version stored.
+    -->
+    <link rel="stylesheet" href="style.css?v=1.3">
+</head>
+<body class="bg-background">
+
+    <div id="page-content">
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200">
+            <div id="header-content" class="max-w-7xl mx-auto px-4">
+                <!-- Dynamic Header will be injected here by auth-header.js -->
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section class="relative h-[calc(100vh-4rem)] flex items-center justify-center text-center text-white px-4 overflow-hidden">
+                <!-- The overlay now includes a blue tint and a backdrop blur effect -->
+                <div class="absolute top-0 left-0 w-full h-full bg-blue-900/40 backdrop-blur-sm z-10"></div>
+                <!-- The background image has been updated to feature black students -->
+                <img src="https://www.canterbury.ac.uk/image-library/events/black-intern-2.x81d7950f.jpg" alt="A group of black students collaborating in a modern workspace" class="absolute top-0 left-0 w-full h-full object-cover z-0">
+                <div class="relative z-20 max-w-4xl mx-auto animate-on-scroll animate-fade-in">
+                    <h1 class="text-5xl md:text-7xl font-extrabold mb-6">Your Future Starts Here</h1>
+                    <p class="text-lg md:text-xl text-slate-200 mb-8 max-w-2xl mx-auto">Connect with top companies, discover amazing internship opportunities, and launch your career with confidence.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a class="btn btn-primary btn-lg" href="auth.html#signup">
+                            Join as a Student
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-5 w-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                        <a class="btn btn-secondary btn-lg" href="auth.html#signup-company">For Companies</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Featured Companies & Universities Section -->
+            <section class="py-24 px-4 bg-slate-50">
+                <div class="max-w-7xl mx-auto text-center">
+                    <h2 class="text-sm font-bold uppercase text-slate-500 tracking-widest">Trusted by leading companies and universities</h2>
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-8 items-center">
+                        <img src="https://th.bing.com/th/id/OIP.msCBQ4ZVX350cq5ZK59neQAAAA?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="CBZ Holdings" class="h-12 mx-auto grayscale opacity-60 hover:opacity-100 transition-opacity">
+                        <img src="https://ewzinvestor.com/wp-content/uploads/2024/12/zw-eco-logo.svg" alt="Econet Wireless" class="h-10 mx-auto grayscale opacity-60 hover:opacity-100 transition-opacity">
+                        <img src="https://www.nust.ac.zw/images/headers/logo.png" alt="National University of Science and Technology (NUST)" class="h-14 mx-auto grayscale opacity-60 hover:opacity-100 transition-opacity">
+                        <img src="https://www.uz.ac.zw/images/demo/general/gravity-logo-white.png" alt="University of Zimbabwe" class="h-16 mx-auto grayscale opacity-60 hover:opacity-100 transition-opacity">
+                        <img src="https://delta.co.zw/wp-content/uploads/2024/06/Delta-Logo1-gold.png" alt="Delta Corporation" class="h-10 mx-auto grayscale opacity-60 hover:opacity-100 transition-opacity">
+                        <img src="https://bv.world/wp-content/uploads/2022/03/OldMutual-logo.jpg" alt="Old Mutual" class="h-12 mx-auto grayscale opacity-60 hover:opacity-100 transition-opacity">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us Section -->
+            <section class="py-24 px-4 max-w-7xl mx-auto">
+                <div class="text-center mb-16 animate-on-scroll animate-slide-in-up">
+                    <h2 class="section-title">Why Choose InternConnect?</h2>
+                    <p class="section-subtitle">We bridge the gap between talented students and innovative companies.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card p-8 animate-on-scroll animate-slide-in-up">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-primary"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3 class="card-title-sm mt-6">For Students</h3>
+                        <p class="card-description mt-2">Discover internships that match your skills. Build your profile, apply with ease, and track your applications.</p>
+                    </div>
+                    <div class="card p-8 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.2s;">
+                        <div class="card-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-primary"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>
+                        </div>
+                        <h3 class="card-title-sm mt-6">For Companies</h3>
+                        <p class="card-description mt-2">Find talented interns who bring fresh perspectives. Post opportunities, manage applications, and build your future team.</p>
+                    </div>
+                    <div class="card p-8 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.4s;">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-primary"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                        </div>
+                        <h3 class="card-title-sm mt-6">Success Stories</h3>
+                        <p class="card-description mt-2">Join thousands of successful matches that have helped students launch careers and companies find top talent.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section class="py-24 px-4 bg-slate-50">
+                <div class="max-w-4xl mx-auto text-center animate-on-scroll animate-slide-in-up">
+                     <h2 class="section-title">What Our Users Say</h2>
+                     <p class="section-subtitle mb-16">Real stories from students and companies who found their perfect match.</p>
+                     <div class="relative">
+                         <div class="relative bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                            <p class="text-xl italic text-slate-700">"InternConnect was a game-changer for me. I found an internship at my dream company within weeks of signing up. The platform is intuitive and made the application process so easy."</p>
+                            <div class="mt-6">
+                                <p class="font-bold text-slate-900">Paramu Mafongoya</p>
+                                <p class="text-sm text-slate-500">Civil Engineering Student at NUST</p>
+                            </div>
+                         </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-32 px-4 hero-gradient">
+                <div class="max-w-4xl mx-auto text-center animate-on-scroll animate-slide-in-up">
+                    <h2 class="section-title">Ready to Start Your Journey?</h2>
+                    <p class="section-subtitle mb-8">Whether you're a student or a company, InternConnect is your gateway to success.</p>
+                    <a class="btn btn-primary btn-lg" href="auth.html#signup">Get Started Now</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <a class="flex items-center space-x-2" href="index.html">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
+                            <span class="text-xl font-bold text-foreground">InternConnect</span>
+                        </a>
+                        <p class="text-sm text-foreground/60 mt-4">Connecting talented students with innovative companies.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">Quick Links</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="jobs.html" class="footer-link">Browse Jobs</a></li>
+                            <li><a href="companies.html" class="footer-link">Browse Companies</a></li>
+                            <li><a href="about.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Students</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="auth.html#signup" class="footer-link">Create Profile</a></li>
+                            <li><a href="student-dashboard.html" class="footer-link">Student Dashboard</a></li>
+                            <li><a href="resources.html" class="footer-link">Career Resources</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Companies</h3>
+                        <ul class="mt-4 space-y-2">
+                             <li><a href="auth.html#signup-company" class="footer-link">Post Jobs</a></li>
+                            <li><a href="company-dashboard.html" class="footer-link">Company Dashboard</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact Sales</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t pt-8 text-center">
+                    <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- 
+      The 'defer' attribute tells the browser to wait until the HTML is fully parsed 
+      before running the scripts. This prevents many common rendering issues.
+    -->
+    <script type="module" src="auth-header.js" defer></script>
+    <script src="animations.js" defer></script>
+
+</body>
+</html>
+

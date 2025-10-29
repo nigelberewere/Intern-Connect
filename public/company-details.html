@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details | InternConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.6">
+</head>
+<body class="bg-background">
+    <div id="loader" class="fixed inset-0 bg-background z-50 flex justify-center items-center">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div id="page-content" class="min-h-screen flex-col hidden">
+        <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-40 border-b border-slate-200">
+            <div id="header-container" class="max-w-7xl mx-auto px-4">
+                <!-- Header will be injected by auth-header.js -->
+            </div>
+        </header>
+
+        <main class="py-12 px-4 flex-grow">
+            <div id="company-details-container" class="max-w-5xl mx-auto">
+                <!-- SKELETON LOADER -->
+                <div id="company-details-skeleton">
+                    <div class="card p-8">
+                        <div class="flex flex-col md:flex-row items-start gap-8">
+                            <div class="shimmer-wrapper w-24 h-24 rounded-2xl flex-shrink-0"></div>
+                            <div class="w-full space-y-3">
+                                <div class="shimmer-wrapper h-9 w-3/5 rounded-lg"></div>
+                                <div class="shimmer-wrapper h-5 w-2/5 rounded-md"></div>
+                            </div>
+                        </div>
+                        <div class="mt-8 space-y-3">
+                            <div class="shimmer-wrapper h-5 w-full rounded-md"></div>
+                            <div class="shimmer-wrapper h-5 w-full rounded-md"></div>
+                            <div class="shimmer-wrapper h-5 w-4/5 rounded-md"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ACTUAL COMPANY CONTENT WILL BE INJECTED HERE -->
+            </div>
+        </main>
+    </div>
+    <script type="module" src="company-details.js"></script>
+    <script type="module" src="auth-header.js"></script>
+</body>
+</html>

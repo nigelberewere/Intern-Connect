@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Applicants | InternConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background">
+     <div id="loader" class="fixed inset-0 bg-background z-50 flex justify-center items-center">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div id="page-content" class="min-h-screen flex flex-col hidden">
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm border-b sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4">
+                <div id="header-content" class="flex justify-between items-center h-16">
+                    <!-- Dynamic Header -->
+                </div>
+            </div>
+        </header>
+
+        <main class="py-8 px-4 flex-grow">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <a href="company-dashboard.html" class="text-sm font-medium text-primary hover:underline flex items-center mb-4">
+                        &larr; Back to Dashboard
+                    </a>
+                    <h1 id="job-title" class="section-title">Applicants for...</h1>
+                    <p class="section-subtitle">Review the students who have applied for this position.</p>
+                </div>
+                
+                <div id="applicants-container" class="space-y-4">
+                    <!-- Applicant cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-white border-t mt-auto">
+            <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+                <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="auth-header.js"></script>
+    <script type="module" src="view-applicants.js"></script>
+    <script src="animations.js" defer></script>
+</body>
+</html>

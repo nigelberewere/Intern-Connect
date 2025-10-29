@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs | InternConnect</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Updated stylesheet version -->
+    <link rel="stylesheet" href="style.css?v=1.5">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<!-- Updated body class for the new background -->
+<body class="bg-background">
+
+    <div id="page-content">
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200">
+            <div id="header-content" class="max-w-7xl mx-auto px-4">
+                <!-- Dynamic Header will be injected here -->
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-16 px-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 animate-on-scroll animate-fade-in">
+                    <h1 class="section-title">Find Your Perfect Internship</h1>
+                    <p class="section-subtitle">Discover amazing internship opportunities from top companies.</p>
+                </div>
+
+                <!-- Search and Filter Bar -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 border animate-on-scroll animate-fade-in">
+                    <div class="grid md:grid-cols-4 gap-4 items-center">
+                        <div class="md:col-span-2 relative">
+                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                            <input id="search-input" type="text" class="filter-input pl-12" placeholder="Job title, company, or skill...">
+                        </div>
+                        <select id="location-filter" class="filter-input">
+                            <option value="">All Locations</option>
+                            <option value="San Francisco, CA">San Francisco, CA</option>
+                            <option value="New York, NY">New York, NY</option>
+                            <option value="Bulawayo, Zimbabwe">Bulawayo, Zimbabwe</option>
+                             <option value="Harare, Zimbabwe">Harare, Zimbabwe</option>
+                            <option value="Gweru, Zimbabwe">Gweru, Zimbabwe</option>
+                            <option value="Boston, MA">Boston, MA</option>
+                            <option value="Remote">Remote</option>
+                        </select>
+                        <select id="type-filter" class="filter-input">
+                            <option value="">All Types</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Job Listings -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="jobs-count" class="text-lg font-semibold text-slate-800">Loading internships...</h2>
+                </div>
+                
+                <div id="jobs-container" class="space-y-4">
+                    <!-- JS will inject skeleton loader here initially, then the actual job cards -->
+                </div>
+
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-white border-t">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <a class="flex items-center space-x-2" href="index.html">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
+                            <span class="text-xl font-bold text-foreground">InternConnect</span>
+                        </a>
+                        <p class="text-sm text-foreground/60 mt-4">Connecting talented students with innovative companies.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">Quick Links</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="jobs.html" class="footer-link">Browse Jobs</a></li>
+                            <li><a href="companies.html" class="footer-link">Browse Companies</a></li>
+                            <li><a href="about.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Students</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="auth.html#signup" class="footer-link">Create Profile</a></li>
+                            <li><a href="student-dashboard.html" class="footer-link">Student Dashboard</a></li>
+                            <li><a href="resources.html" class="footer-link">Career Resources</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Companies</h3>
+                        <ul class="mt-4 space-y-2">
+                             <li><a href="auth.html#signup-company" class="footer-link">Post Jobs</a></li>
+                            <li><a href="company-dashboard.html" class="footer-link">Company Dashboard</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact Sales</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t pt-8 text-center">
+                    <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script type="module" src="jobs.js" defer></script>
+    <script type="module" src="auth-header.js" defer></script>
+    <script src="animations.js" defer></script>
+
+</body>
+</html>
+

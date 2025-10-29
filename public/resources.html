@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Resources | InternConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background">
+
+    <div id="page-content" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm border-b sticky top-0 z-50">
+            <div id="header-content" class="max-w-7xl mx-auto px-4">
+                <!-- Header populated by auth-header.js -->
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-12 px-4 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 animate-on-scroll animate-fade-in">
+                    <h1 class="section-title">Career Resources</h1>
+                    <p class="section-subtitle">Everything you need to succeed in your internship search and career journey.</p>
+                </div>
+
+                <!-- Featured Resources -->
+                <div class="mb-16">
+                    <h2 class="text-2xl font-bold text-foreground mb-6">Featured Resources</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Featured Card 1 -->
+                        <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 animate-on-scroll animate-slide-in-up">
+                            <h3 class="text-xl font-bold text-foreground mb-2">Interview Mastery Course</h3>
+                            <p class="text-sm text-foreground/70 mb-4">Complete guide to acing technical and behavioral interviews.</p>
+                            <a href="#" class="btn btn-primary w-full !rounded-lg">Start Learning</a>
+                        </div>
+                        <!-- Featured Card 2 -->
+                        <div class="p-6 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-100 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.1s;">
+                            <h3 class="text-xl font-bold text-foreground mb-2">Resume Templates</h3>
+                            <p class="text-sm text-foreground/70 mb-4">Professional templates for different industries and roles.</p>
+                            <a href="#" class="btn btn-secondary w-full !rounded-lg">Download Now</a>
+                        </div>
+                        <!-- Featured Card 3 -->
+                        <div class="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-100 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.2s;">
+                            <h3 class="text-xl font-bold text-foreground mb-2">Career Roadmaps</h3>
+                            <p class="text-sm text-foreground/70 mb-4">Step-by-step guides for different career paths in tech.</p>
+                            <a href="#" class="btn btn-secondary w-full !rounded-lg">Explore Paths</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="bg-white rounded-2xl shadow-sm p-4 mb-8 border animate-on-scroll animate-fade-in">
+                    <div class="grid md:grid-cols-5 gap-4 items-center">
+                        <div class="md:col-span-2 relative">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/40"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                            <input id="search-input" type="text" class="input pl-10" placeholder="Search resources...">
+                        </div>
+                        <select id="category-filter" class="input">
+                            <option value="">All Categories</option>
+                            <option>resume</option>
+                            <option>interview</option>
+                            <option>networking</option>
+                            <option>career</option>
+                        </select>
+                        <select id="type-filter" class="input">
+                            <option value="">All Types</option>
+                            <option>Article</option>
+                            <option>Video</option>
+                            <option>Course</option>
+                            <option>Webinar</option>
+                            <option>Template</option>
+                        </select>
+                         <select id="difficulty-filter" class="input">
+                            <option value="">All Difficulties</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="resources-count" class="text-xl font-semibold text-foreground">Loading resources...</h2>
+                </div>
+                
+                <div id="loader" class="text-center py-10">
+                    <div class="loader-spinner"></div>
+                </div>
+                
+                <div id="resources-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Resource cards will be dynamically inserted here -->
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button id="load-more-btn" class="btn btn-secondary hidden">Load More Resources</button>
+                </div>
+
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-white border-t mt-auto">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <a class="flex items-center space-x-2" href="landing.html">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
+                            <span class="text-xl font-bold text-foreground">InternConnect</span>
+                        </a>
+                        <p class="text-sm text-foreground/60 mt-4">Your future starts here.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">Quick Links</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="jobs.html" class="footer-link">Browse Jobs</a></li>
+                            <li><a href="companies.html" class="footer-link">Browse Companies</a></li>
+                            <li><a href="about.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Students</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="signup.html" class="footer-link">Create Profile</a></li>
+                            <li><a href="index.html" class="footer-link">Student Dashboard</a></li>
+                            <li><a href="resources.html" class="footer-link">Career Resources</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider">For Companies</h3>
+                        <ul class="mt-4 space-y-2">
+                             <li><a href="signup.html?type=company" class="footer-link">Post Jobs</a></li>
+                            <li><a href="company-dashboard.html" class="footer-link">Company Dashboard</a></li>
+                            <li><a href="contact.html" class="footer-link">Contact Sales</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t pt-8 text-center">
+                    <p class="text-sm text-foreground/60">© 2025 InternConnect. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script type="module" src="auth-header.js"></script>
+    <script type="module" src="resources.js"></script>
+    <script src="animations.js" defer></script>
+
+</body>
+</html>
