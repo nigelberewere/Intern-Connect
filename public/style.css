@@ -585,3 +585,88 @@ select.filter-input {
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
 }
+
+/* --- Responsive adjustments for Authentication page (mobile) --- */
+@media (max-width: 768px) {
+    .auth-body {
+        align-items: flex-start;
+        padding-top: 2rem;
+        height: auto;
+        overflow: auto;
+    }
+
+    .auth-video-bg {
+        display: none;
+    }
+
+    .auth-container {
+        width: calc(100% - 2rem);
+        min-height: auto;
+        border-radius: 1rem;
+        padding: 0.5rem;
+        margin: 0 1rem 2rem 1rem;
+        box-shadow: none;
+        border: none;
+        background-color: rgba(255,255,255,0.03);
+    }
+
+    .form-container,
+    .overlay-container,
+    .overlay,
+    .overlay-panel {
+        position: relative;
+        width: 100%;
+        left: 0;
+        transform: none !important;
+        height: auto;
+        top: auto;
+        display: block;
+        padding: 0;
+    }
+
+    .sign-in-container,
+    .sign-up-container {
+        position: relative;
+        width: 100%;
+        opacity: 1 !important;
+        z-index: 2;
+        background-color: rgba(255,255,255,0.95);
+        margin-bottom: 1rem;
+        border-radius: 0.75rem;
+    }
+
+    .auth-form {
+        padding: 1.5rem;
+        text-align: left;
+    }
+
+    .auth-h1 {
+        font-size: 1.25rem;
+    }
+
+    .auth-p {
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+
+    .auth-button {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .auth-tabs {
+        gap: 0.25rem;
+    }
+
+    .overlay {
+        display: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .auth-h1 { font-size: 1.1rem; }
+    .auth-input { padding: 0.6rem 0.75rem; }
+    .auth-button { padding: 0.55rem 0.75rem; }
+    .auth-form { padding: 1rem; }
+}
