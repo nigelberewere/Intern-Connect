@@ -1,0 +1,46 @@
+{
+  "resources": [
+    {
+      "id": "template-bold-name-resume-20251115-v1",
+      "title": "Bold Name Resume",
+      "description": "A modern resume template with a bold name header, suitable for creative roles.",
+      "type": "Template",
+      "category": "resume",
+      "filename": "bold name resume.docx",
+      "preview": "bold name resume.pdf",
+      "tags": ["resume","template","creative"],
+      "date": "2025-11-15",
+      "author": "InternConnect",
+      "license": "CC-BY-4.0",
+      "visibility": "public"
+    },
+    {
+      "id": "template-modern-chron-resume-20251115-v1",
+      "title": "Modern Chronological Resume",
+      "description": "A clean, chronological resume template focused on work experience and clarity.",
+      "type": "Template",
+      "category": "resume",
+      "filename": "Modern chronological resume.docx",
+      "preview": "Modern chronological resume.pdf",
+      "tags": ["resume","template","chronological"],
+      "date": "2025-11-15",
+      "author": "InternConnect",
+      "license": "CC-BY-4.0",
+      "visibility": "public"
+    },
+    {
+      "id": "template-social-media-marketing-resume-20251115-v1",
+      "title": "Social Media Marketing Resume",
+      "description": "Template tailored for marketing roles with sections for campaigns, metrics, and tools.",
+      "type": "Template",
+      "category": "resume",
+      "filename": "social media marketing resume.docx",
+      "preview": "social media marketing resume.pdf",
+      "tags": ["resume","template","marketing"],
+      "date": "2025-11-15",
+      "author": "InternConnect",
+      "license": "CC-BY-4.0",
+      "visibility": "public"
+    }
+  ]
+}

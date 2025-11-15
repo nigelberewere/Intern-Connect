@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getFirestore, collection, getDocs, query, where, limit, startAfter, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, where, limit, startAfter, orderBy, doc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCuTqAWpb5PWWNA6icwJem1k_GgkNP2YS4",
@@ -43,13 +43,21 @@ const difficultyColors = {
     Advanced: 'bg-red-100 text-red-700'
 };
 
+// Estimate read time from text (words per minute)
+function estimateReadTime(text) {
+    const words = (text || '').trim().split(/\s+/).filter(Boolean).length;
+    const wpm = 220; // average reading speed
+    const minutes = Math.max(1, Math.round(words / wpm));
+    return `${minutes} min read`;
+}
+
 // --- RESOURCE CARD CREATION ---
 function createResourceCard(resourceData) {
-    const { title, description, category, type, difficulty, link, author, date, readTime, downloads } = resourceData;
+    const { title, description, category, type, difficulty, link, preview, author, date, readTime, downloads } = resourceData;
     const typeIcon = iconMap[type] || iconMap['Article'];
     const diffColor = difficultyColors[difficulty] || 'bg-gray-100 text-gray-700';
 
-    const tags = (resourceData.tags || ['general']).map(tag => `<span class="resource-tag">${tag}</span>`).join('');
+    const tags = (resourceData.tags || ['general']).map(tag => `<span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">${tag}</span>`).join('');
     const formattedDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
     let actionButton;
@@ -59,34 +67,59 @@ function createResourceCard(resourceData) {
             actionButton = `<a href="${link}" target="_blank" class="btn btn-primary w-full !rounded-lg mt-4">Watch Now</a>`;
             break;
         case 'Template':
-            actionButton = `<a href="${link}" target="_blank" class="btn btn-primary w-full !rounded-lg mt-4">Download</a>`;
+            // For templates (often DOCX) prefer an in-browser PDF preview if available, otherwise use Google Docs viewer
+            const fileUrl = link;
+            let previewUrl = null;
+            if (preview) {
+                previewUrl = preview; // already a full path like /resources/resumes/... encoded earlier
+            } else if (fileUrl.endsWith('.docx')) {
+                // derive probable PDF name by replacing extension
+                previewUrl = fileUrl.replace(/\.docx$/i, '.pdf');
+            }
+
+            if (previewUrl) {
+                actionButton = `
+                    <div class="flex gap-2 mt-4">
+                        <a href="${previewUrl}" target="_blank" class="btn btn-outline flex-1">Preview</a>
+                        <a href="${fileUrl}" target="_blank" class="btn btn-primary flex-1 download-link" data-id="${resourceData.id || ''}">Download</a>
+                    </div>
+                `;
+            } else {
+                const googleViewer = `https://docs.google.com/gview?url=${encodeURIComponent(window.location.origin + fileUrl)}&embedded=true`;
+                actionButton = `
+                    <div class="flex gap-2 mt-4">
+                        <a href="${googleViewer}" target="_blank" class="btn btn-outline flex-1">Preview</a>
+                        <a href="${fileUrl}" target="_blank" class="btn btn-primary flex-1 download-link" data-id="${resourceData.id || ''}">Download</a>
+                    </div>
+                `;
+            }
             break;
         default:
-             actionButton = `<a href="${link}" target="_blank" class="btn btn-primary w-full !rounded-lg mt-4">View Resource</a>`;
+             actionButton = `<a href="${link}" target="_blank" class="btn btn-primary w-full !rounded-lg mt-4 download-link" data-id="${resourceData.id || ''}">View Resource</a>`;
     }
 
     return `
-        <div class="resource-card">
-            <div class="flex justify-between items-center mb-3">
-                <span class="resource-type-badge">${typeIcon} ${type}</span>
-                <span class="resource-difficulty-badge ${diffColor}">${difficulty}</span>
-            </div>
-            <h3 class="text-lg font-bold text-foreground mb-2 line-clamp-2">${title}</h3>
-            
-            <div class="resource-meta">
-                <span>${author}</span> · <span>${formattedDate}</span>
+        <div class="card resource-card p-6 rounded-2xl flex flex-col h-full">
+            <div class="flex justify-between items-start mb-3 gap-4">
+                <div class="flex items-center gap-2 text-sm text-foreground/80">${typeIcon}<span class="font-semibold">${type}</span></div>
+                <div class="text-xs font-semibold px-3 py-1 rounded-full ${diffColor}">${difficulty}</div>
             </div>
 
-            <div class="resource-stats">
+            <h3 class="text-lg font-bold text-foreground mb-2 line-clamp-2">${title}</h3>
+
+            <div class="text-sm text-foreground/60 mb-3">${author} · ${formattedDate}</div>
+
+            <div class="flex items-center gap-4 text-sm text-foreground/60 mb-3">
                 <span>${readTime}</span>
+                <span>·</span>
                 <span>${downloads} downloads</span>
             </div>
 
-            <p class="text-sm text-foreground/70 my-4 line-clamp-3 flex-grow">${description}</p>
-            
-            <div class="flex flex-wrap gap-2 mb-2">${tags}</div>
+            <p class="text-sm text-foreground/70 my-4 line-clamp-3">${description}</p>
 
-            ${actionButton}
+            <div class="flex flex-wrap gap-2 mb-4">${tags}</div>
+
+            <div class="mt-auto">${actionButton}</div>
         </div>
     `;
 }
@@ -111,6 +144,71 @@ function displayResources() {
 
 async function fetchResources() {
     try {
+        // Try a few common paths for the local metadata (works for local server or deployed site)
+        const metaPaths = [
+            'resources/meta/index.json',
+            '/resources/meta/index.json',
+            './resources/meta/index.json'
+        ];
+        let meta = null;
+        for (const p of metaPaths) {
+            try {
+                const resp = await fetch(p);
+                if (resp.ok) {
+                    meta = await resp.json();
+                    break;
+                }
+            } catch (err) {
+                // ignore and try next
+            }
+        }
+        if (meta) {
+            allResources = (meta.resources || []).map(item => ({
+                id: item.id,
+                    title: item.title,
+                    description: item.description,
+                    category: item.category || 'general',
+                    type: item.type || 'Template',
+                    difficulty: item.difficulty || 'Beginner',
+                    author: item.author || 'InternConnect Team',
+                    date: item.date || new Date().toISOString(),
+                    readTime: item.readTime || estimateReadTime(item.description || ''),
+                    downloads: item.downloads || 0,
+                tags: item.tags || [],
+                filename: item.filename || null,
+                // Use relative paths (no leading slash) so the link resolves correctly from the site root or nested deploy paths
+                link: item.filename ? `resources/resumes/${encodeURIComponent(item.filename)}` : (item.link || '#'),
+                preview: item.preview ? `resources/resumes/${encodeURIComponent(item.preview)}` : null
+            }));
+
+            // Merge existing download counts from Firestore documents when available.
+            // This keeps counts persistent across page refreshes for items that have a Firestore doc with the same `id`.
+            try {
+                await Promise.all(allResources.map(async (r, idx) => {
+                    if (!r.id) return;
+                    try {
+                        const docRef = doc(db, 'resources', r.id);
+                        const snap = await getDoc(docRef);
+                        if (snap.exists()) {
+                            const data = snap.data();
+                            if (typeof data.downloads === 'number') {
+                                allResources[idx].downloads = data.downloads;
+                            }
+                        }
+                    } catch (e) {
+                        // ignore read errors (rules, network) and continue
+                    }
+                }));
+            } catch (e) {
+                // ignore
+            }
+
+            filteredResources = [...allResources];
+            displayResources();
+            return;
+        }
+
+        // Fallback: fetch from Firestore collection 'resources' if meta not available
         const resourcesCol = collection(db, 'resources');
         const resourceSnapshot = await getDocs(resourcesCol);
         allResources = resourceSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -119,7 +217,8 @@ async function fetchResources() {
         allResources.forEach(res => {
             res.author = res.author || 'InternConnect Team';
             res.date = res.date || new Date().toISOString();
-            res.readTime = res.readTime || `${Math.floor(Math.random()*10)+2} min read`;
+            // Estimate read time from description or content if not provided
+            res.readTime = res.readTime || estimateReadTime(res.description || res.content || '');
             res.downloads = res.downloads || Math.floor(Math.random()*1000)+50;
             res.difficulty = res.difficulty || ['Beginner', 'Intermediate', 'Advanced'][Math.floor(Math.random()*3)];
         });
@@ -157,6 +256,37 @@ function applyFilters() {
 
 // --- EVENT LISTENERS ---
 document.addEventListener('DOMContentLoaded', fetchResources);
+
+// Track download clicks: optimistic UI increment + Firestore increment (best-effort)
+resourcesContainer.addEventListener('click', async (e) => {
+    const anchor = e.target.closest && e.target.closest('a.download-link');
+    if (!anchor) return;
+    // don't block the navigation/download — update counts in background
+    const id = anchor.dataset.id;
+
+    // Optimistically update local data and re-render
+    if (id) {
+        const idx = allResources.findIndex(r => r.id === id);
+        if (idx !== -1) {
+            allResources[idx].downloads = (allResources[idx].downloads || 0) + 1;
+            // Keep filteredResources in sync and re-display
+            const frIdx = filteredResources.findIndex(r => r.id === id);
+            if (frIdx !== -1) filteredResources[frIdx].downloads = allResources[idx].downloads;
+            displayResources();
+        }
+    }
+
+    // Firestore increment (best-effort). Works only if the document exists and rules allow the update.
+    if (id) {
+        try {
+            const docRef = doc(db, 'resources', id);
+            await updateDoc(docRef, { downloads: increment(1) });
+        } catch (err) {
+            // ignore failures (document may not exist or rules may block updates)
+            // console.debug('Could not increment downloads in Firestore for', id, err);
+        }
+    }
+});
 
 [searchInput, categoryFilter, typeFilter, difficultyFilter].forEach(el => {
     el.addEventListener('change', applyFilters);

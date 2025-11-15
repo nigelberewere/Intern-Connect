@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -23,12 +23,37 @@ const studentTab = document.getElementById('student-tab');
 const companyTab = document.getElementById('company-tab');
 const studentFields = document.getElementById('student-fields');
 const companyFields = document.getElementById('company-fields');
+const mobileToSignin = document.getElementById('mobile-to-signin');
+const mobileToSignup = document.getElementById('mobile-to-signup');
+const backBtn = document.getElementById('back-btn');
 
 if (signUpButton) {
     signUpButton.addEventListener('click', () => container.classList.add('right-panel-active'));
 }
 if (signInButton) {
     signInButton.addEventListener('click', () => container.classList.remove('right-panel-active'));
+}
+
+if (mobileToSignin) {
+    mobileToSignin.addEventListener('click', () => container.classList.remove('right-panel-active'));
+}
+if (mobileToSignup) {
+    mobileToSignup.addEventListener('click', () => container.classList.add('right-panel-active'));
+}
+
+if (backBtn) {
+    backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        try {
+            if (history.length > 1) {
+                history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        } catch (err) {
+            window.location.href = 'index.html';
+        }
+    });
 }
 
 if (studentTab) {
@@ -91,12 +116,58 @@ if(loginForm) {
     });
 }
 
+        // Forgot password handler: uses email from the login field or prompts the user
+        const forgotLink = document.getElementById('forgot-password');
+        if (forgotLink) {
+            forgotLink.addEventListener('click', async (e) => {
+                e.preventDefault();
+                // Try to use the email already entered in the login form
+                const entered = document.getElementById('loginEmail') ? document.getElementById('loginEmail').value.trim() : '';
+                let targetEmail = entered && entered.includes('@') ? entered : '';
+
+                if (!targetEmail) {
+                    targetEmail = prompt('Enter your account email to receive a password reset link:');
+                    if (!targetEmail) return;
+                    targetEmail = targetEmail.trim();
+                }
+
+                try {
+                    await sendPasswordResetEmail(auth, targetEmail);
+                    const successMsg = 'Password reset email sent — check your inbox and your spam/junk folder.';
+                    if (errorLogin) {
+                        errorLogin.textContent = successMsg;
+                    } else {
+                        alert(successMsg);
+                    }
+                } catch (err) {
+                    const message = getFriendlyErrorMessage(err.code) || 'Failed to send password reset email.';
+                    if (errorLogin) {
+                        errorLogin.textContent = message;
+                    } else {
+                        alert(message);
+                    }
+                }
+            });
+        }
+
 
 if(signupForm){
     signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
         errorSignup.textContent = '';
         const isStudent = studentTab.classList.contains('active');
+        // Disable inputs that belong to the hidden role to avoid native browser
+        // validation trying to focus hidden required controls (causes the
+        // "An invalid form control with name='' is not focusable" error).
+        const studentInputs = studentFields.querySelectorAll('input,textarea,select');
+        const companyInputs = companyFields.querySelectorAll('input,textarea,select');
+        if (isStudent) {
+            companyInputs.forEach(i => { i.disabled = true; });
+            studentInputs.forEach(i => { i.disabled = false; });
+        } else {
+            studentInputs.forEach(i => { i.disabled = true; });
+            companyInputs.forEach(i => { i.disabled = false; });
+        }
 
         const email = isStudent ? signupForm.studentEmail.value : signupForm.companyEmail.value;
         const password = isStudent ? signupForm.studentPassword.value : signupForm.companyPassword.value;
@@ -139,6 +210,9 @@ if(signupForm){
             .catch(error => {
                 errorSignup.textContent = getFriendlyErrorMessage(error.code);
             });
+        // Re-enable all inputs after attempt (in case user stays on the page)
+        studentInputs.forEach(i => { i.disabled = false; });
+        companyInputs.forEach(i => { i.disabled = false; });
     });
 }
 

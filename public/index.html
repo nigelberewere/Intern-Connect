@@ -8,15 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
-    <!-- This script loads the Tailwind CSS framework, which is needed for the site's styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Use locally-built Tailwind CSS in production. Build with `npm run build:css`. -->
+        <link rel="stylesheet" href="tailwind.css?v=1.0">
 
-    <!-- 
-      This link tells the browser to load our stylesheet.
-      The "?v=1.3" is a cache-busting query. It forces the browser 
-      to re-download the file if it has an older version stored.
-    -->
-    <link rel="stylesheet" href="style.css?v=1.3">
+        <!--
+            This link tells the browser to load our custom stylesheet (overrides/custom rules).
+            The "?v=1.3" is a cache-busting query.
+        -->
+        <link rel="stylesheet" href="style.css?v=1.3">
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
 </head>
 <body class="bg-background">
 
@@ -49,8 +49,8 @@
                 </div>
             </section>
             
-            <!-- Featured Companies & Universities Section -->
-            <section class="py-24 px-4 bg-slate-50">
+            <!-- Featured Companies & Universities Section (strongest green shade + stripes) -->
+            <section data-bg="mission" class="py-24 px-4 section-green-1 pattern-stripes">
                 <div class="max-w-7xl mx-auto text-center">
                     <h2 class="text-sm font-bold uppercase text-slate-500 tracking-widest">Trusted by leading companies and universities</h2>
                     <div class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-8 items-center">
@@ -64,8 +64,8 @@
                 </div>
             </section>
 
-            <!-- Why Choose Us Section -->
-            <section class="py-24 px-4 max-w-7xl mx-auto">
+            <!-- Why Choose Us Section (medium green shade + dots) -->
+            <section data-bg="team" class="py-24 px-4 max-w-7xl mx-auto section-green-2 pattern-dots">
                 <div class="text-center mb-16 animate-on-scroll animate-slide-in-up">
                     <h2 class="section-title">Why Choose InternConnect?</h2>
                     <p class="section-subtitle">We bridge the gap between talented students and innovative companies.</p>
@@ -95,8 +95,8 @@
                 </div>
             </section>
             
-            <!-- Testimonials Section -->
-            <section class="py-24 px-4 bg-slate-50">
+            <!-- Testimonials Section (lighter green shade + grid) -->
+            <section data-bg="hero" class="py-24 px-4 section-green-3 pattern-grid">
                 <div class="max-w-4xl mx-auto text-center animate-on-scroll animate-slide-in-up">
                      <h2 class="section-title">What Our Users Say</h2>
                      <p class="section-subtitle mb-16">Real stories from students and companies who found their perfect match.</p>
@@ -112,8 +112,8 @@
                 </div>
             </section>
 
-            <!-- CTA Section -->
-            <section class="py-32 px-4 hero-gradient">
+            <!-- CTA Section (faint green shade + waves pattern) -->
+            <section data-bg="mission" class="py-32 px-4 section-green-4 pattern-waves">
                 <div class="max-w-4xl mx-auto text-center animate-on-scroll animate-slide-in-up">
                     <h2 class="section-title">Ready to Start Your Journey?</h2>
                     <p class="section-subtitle mb-8">Whether you're a student or a company, InternConnect is your gateway to success.</p>
@@ -170,6 +170,7 @@
       before running the scripts. This prevents many common rendering issues.
     -->
     <script type="module" src="auth-header.js" defer></script>
+    <script type="module" src="section-bg.js" defer></script>
     <script src="animations.js" defer></script>
 
 </body>

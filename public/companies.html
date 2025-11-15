@@ -8,17 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="companies.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+        <!-- Use locally-built Tailwind CSS in production. Build with `npm run build:css`. -->
+        <link rel="stylesheet" href="tailwind.css?v=1.0">
 </head>
 <body>
-
-    <div class="video-background">
-        <video playsinline autoplay muted loop poster="https://png.pngtree.com/thumb_back/fh260/background/20201104/pngtree-technology-background-binary-computer-code-vector-design-image_458702.jpg">
-            <source src="https://png.pngtree.com/thumb_back/fh260/background/20201104/pngtree-technology-background-binary-computer-code-vector-design-image_458702.jpg" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
 
     <div id="page-content" class="min-h-screen flex flex-col">
         <!-- Header -->
@@ -29,68 +23,71 @@
         </header>
 
         <!-- Main Content -->
-        <main class="py-12 px-4 flex-grow">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12 animate-on-scroll animate-fade-in">
-                    <h1 class="section-title">Discover Amazing Companies</h1>
-                    <p class="section-subtitle">Explore top companies offering internship opportunities and find your perfect match.</p>
-                </div>
+        <main>
+            <!-- Companies section with green shade and canvas pattern (mission) -->
+            <section data-bg="mission" class="py-12 px-4 bg-emerald-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12 animate-on-scroll animate-fade-in">
+                        <h1 class="section-title">Discover Amazing Companies</h1>
+                        <p class="section-subtitle">Explore top companies offering internship opportunities and find your perfect match.</p>
+                    </div>
 
-                <!-- Filter Bar -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 border animate-on-scroll animate-fade-in">
-                    <div class="grid md:grid-cols-4 gap-4 items-center">
-                        <div class="relative md:col-span-1">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                            <input id="search-input" type="text" class="filter-input pl-12" placeholder="Search companies...">
+                    <!-- Filter Bar -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 border animate-on-scroll animate-fade-in">
+                        <div class="grid md:grid-cols-4 gap-4 items-center">
+                            <div class="relative md:col-span-1">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                                <input id="search-input" type="text" class="filter-input pl-12" placeholder="Search companies...">
+                            </div>
+                            <select id="industry-filter" class="filter-input">
+                                <option value="">All Industries</option>
+                                <option>Technology</option>
+                                <option>Data Analytics</option>
+                                <option>Design</option>
+                                <option>Marketing</option>
+                                <option>Cloud Services</option>
+                            </select>
+                             <select id="size-filter" class="filter-input">
+                                <option value="">Company Size</option>
+                                <option>1-10 employees</option>
+                                <option>11-50 employees</option>
+                                <option>51-200 employees</option>
+                                <option>201-500 employees</option>
+                                <option>501-1000 employees</option>
+                                <option>1000+ employees</option>
+                            </select>
+                             <select id="location-filter" class="filter-input">
+                                <option value="">All Locations</option>
+                                <option>San Francisco, CA</option>
+                                <option>New York, NY</option>
+                                <option>Austin, TX</option>
+                                 <option>Los Angeles, CA</option>
+                                 <option>Harare, Zimbabwe</option>
+                                <option>Seattle, WA</option>
+                                <option>Boston, MA</option>
+                                <option>Remote</option>
+                            </select>
                         </div>
-                        <select id="industry-filter" class="filter-input">
-                            <option value="">All Industries</option>
-                            <option>Technology</option>
-                            <option>Data Analytics</option>
-                            <option>Design</option>
-                            <option>Marketing</option>
-                            <option>Cloud Services</option>
-                        </select>
-                         <select id="size-filter" class="filter-input">
-                            <option value="">Company Size</option>
-                            <option>1-10 employees</option>
-                            <option>11-50 employees</option>
-                            <option>51-200 employees</option>
-                            <option>201-500 employees</option>
-                            <option>501-1000 employees</option>
-                            <option>1000+ employees</option>
-                        </select>
-                         <select id="location-filter" class="filter-input">
-                            <option value="">All Locations</option>
-                            <option>San Francisco, CA</option>
-                            <option>New York, NY</option>
-                            <option>Austin, TX</option>
-                             <option>Los Angeles, CA</option>
-                             <option>Harare, Zimbabwe</option>
-                            <option>Seattle, WA</option>
-                            <option>Boston, MA</option>
-                            <option>Remote</option>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 id="companies-count" class="text-xl font-semibold text-foreground">Loading companies...</h2>
+                        <select id="sort-filter" class="filter-input !h-11 !w-auto">
+                            <option value="default">Sort by relevance</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
                         </select>
                     </div>
+                    
+                    <div id="companies-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Skeleton loaders or company cards will be dynamically inserted here -->
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button id="load-more-btn" class="btn btn-secondary hidden">Load More Companies</button>
+                    </div>
                 </div>
-
-                <div class="flex justify-between items-center mb-6">
-                    <h2 id="companies-count" class="text-xl font-semibold text-foreground">Loading companies...</h2>
-                    <select id="sort-filter" class="filter-input !h-11 !w-auto">
-                        <option value="default">Sort by relevance</option>
-                        <option value="name-asc">Name (A-Z)</option>
-                        <option value="name-desc">Name (Z-A)</option>
-                    </select>
-                </div>
-                
-                <div id="companies-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Skeleton loaders or company cards will be dynamically inserted here -->
-                </div>
-                
-                <div class="text-center mt-12">
-                    <button id="load-more-btn" class="btn btn-secondary hidden">Load More Companies</button>
-                </div>
-            </div>
+            </section>
         </main>
         
         <!-- Footer -->
@@ -138,6 +135,7 @@
     
     <script type="module" src="companies.js"></script>
     <script type="module" src="auth-header.js"></script>
+    <script type="module" src="section-bg.js" defer></script>
     <script src="animations.js" defer></script>
 
 </body>

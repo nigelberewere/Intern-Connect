@@ -11,18 +11,13 @@
 </head>
 <body class="auth-body">
 
-    <!-- Background Video -->
-    <div class="auth-video-bg">
-        <video autoplay muted loop id="auth-video">
-            <source src="https://media.istockphoto.com/id/1368943001/video/colorful-abstract-wavy-line-motion-background-colorful-techy-dot-line-animation.mp4?s=mp4-640x640-is&k=20&c=jr2MJKJf2_v6mEe59HzUyWrqNAek1u84KGwpIU5tOP8=" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
+    <!-- Background canvas is handled globally by bg-manager (injected via `auth-header.js`) -->
 
     <div class="auth-container" id="container">
+        <button id="back-btn" class="auth-back-btn" aria-label="Back">← Back</button>
         <!-- Sign Up Form Container -->
         <div class="form-container sign-up-container">
-            <form id="signup-form" class="auth-form">
+            <form id="signup-form" class="auth-form" novalidate>
                 <h1 class="auth-h1">Create Account</h1>
                 <div class="auth-tabs">
                     <button type="button" id="student-tab" class="auth-tab active">
@@ -56,6 +51,7 @@
                 </div>
 
                 <button type="submit" class="auth-button">Sign Up</button>
+                <p class="mobile-toggle">Already have an account? <button type="button" id="mobile-to-signin" class="auth-toggle-link">Sign In</button></p>
             </form>
         </div>
 
@@ -66,8 +62,9 @@
                 <div id="error-message-login" class="auth-error"></div>
                 <input type="email" id="loginEmail" placeholder="Email" class="auth-input" required />
                 <input type="password" id="loginPassword" placeholder="Password" class="auth-input" required />
-                <a href="#" class="auth-a">Forgot your password?</a>
+                <a href="#" id="forgot-password" class="auth-a">Forgot your password?</a>
                 <button type="submit" class="auth-button">Sign In</button>
+                <p class="mobile-toggle">Don't have an account? <button type="button" id="mobile-to-signup" class="auth-toggle-link">Sign Up</button></p>
             </form>
         </div>
 
@@ -88,6 +85,7 @@
         </div>
     </div>
     
+    <script type="module" src="auth-header.js"></script>
     <script type="module" src="auth.js"></script>
 </body>
 </html>

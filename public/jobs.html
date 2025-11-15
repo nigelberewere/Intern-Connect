@@ -9,9 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
+    <!-- Use locally-built Tailwind CSS in production. Build with `npm run build:css`. -->
+    <link rel="stylesheet" href="tailwind.css?v=1.0">
+
     <!-- Updated stylesheet version -->
     <link rel="stylesheet" href="style.css?v=1.5">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <!-- Updated body class for the new background -->
 <body class="bg-background">
@@ -25,48 +27,51 @@
         </header>
 
         <!-- Main Content -->
-        <main class="py-16 px-4">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12 animate-on-scroll animate-fade-in">
-                    <h1 class="section-title">Find Your Perfect Internship</h1>
-                    <p class="section-subtitle">Discover amazing internship opportunities from top companies.</p>
-                </div>
-
-                <!-- Search and Filter Bar -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 border animate-on-scroll animate-fade-in">
-                    <div class="grid md:grid-cols-4 gap-4 items-center">
-                        <div class="md:col-span-2 relative">
-                            <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                            <input id="search-input" type="text" class="filter-input pl-12" placeholder="Job title, company, or skill...">
-                        </div>
-                        <select id="location-filter" class="filter-input">
-                            <option value="">All Locations</option>
-                            <option value="San Francisco, CA">San Francisco, CA</option>
-                            <option value="New York, NY">New York, NY</option>
-                            <option value="Bulawayo, Zimbabwe">Bulawayo, Zimbabwe</option>
-                             <option value="Harare, Zimbabwe">Harare, Zimbabwe</option>
-                            <option value="Gweru, Zimbabwe">Gweru, Zimbabwe</option>
-                            <option value="Boston, MA">Boston, MA</option>
-                            <option value="Remote">Remote</option>
-                        </select>
-                        <select id="type-filter" class="filter-input">
-                            <option value="">All Types</option>
-                            <option value="Full-time">Full-time</option>
-                            <option value="Part-time">Part-time</option>
-                        </select>
+        <main>
+            <!-- Jobs section with canvas pattern background (green shade + canvas overlay) -->
+            <section data-bg="mission" class="py-16 px-4 bg-emerald-50">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12 animate-on-scroll animate-fade-in">
+                        <h1 class="section-title">Find Your Perfect Internship</h1>
+                        <p class="section-subtitle">Discover amazing internship opportunities from top companies.</p>
                     </div>
-                </div>
 
-                <!-- Job Listings -->
-                <div class="flex justify-between items-center mb-6">
-                    <h2 id="jobs-count" class="text-lg font-semibold text-slate-800">Loading internships...</h2>
-                </div>
-                
-                <div id="jobs-container" class="space-y-4">
-                    <!-- JS will inject skeleton loader here initially, then the actual job cards -->
-                </div>
+                    <!-- Search and Filter Bar -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 border animate-on-scroll animate-fade-in">
+                        <div class="grid md:grid-cols-4 gap-4 items-center">
+                            <div class="md:col-span-2 relative">
+                                <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                                <input id="search-input" type="text" class="filter-input pl-12" placeholder="Job title, company, or skill...">
+                            </div>
+                            <select id="location-filter" class="filter-input">
+                                <option value="">All Locations</option>
+                                <option value="San Francisco, CA">San Francisco, CA</option>
+                                <option value="New York, NY">New York, NY</option>
+                                <option value="Bulawayo, Zimbabwe">Bulawayo, Zimbabwe</option>
+                                 <option value="Harare, Zimbabwe">Harare, Zimbabwe</option>
+                                <option value="Gweru, Zimbabwe">Gweru, Zimbabwe</option>
+                                <option value="Boston, MA">Boston, MA</option>
+                                <option value="Remote">Remote</option>
+                            </select>
+                            <select id="type-filter" class="filter-input">
+                                <option value="">All Types</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                            </select>
+                        </div>
+                    </div>
 
-            </div>
+                    <!-- Job Listings -->
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 id="jobs-count" class="text-lg font-semibold text-slate-800">Loading internships...</h2>
+                    </div>
+                    
+                    <div id="jobs-container" class="space-y-4">
+                        <!-- JS will inject skeleton loader here initially, then the actual job cards -->
+                    </div>
+
+                </div>
+            </section>
         </main>
         
         <!-- Footer -->
@@ -114,6 +119,7 @@
     
     <script type="module" src="jobs.js" defer></script>
     <script type="module" src="auth-header.js" defer></script>
+    <script type="module" src="section-bg.js" defer></script>
     <script src="animations.js" defer></script>
 
 </body>

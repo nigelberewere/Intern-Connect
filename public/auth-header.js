@@ -38,24 +38,23 @@ onAuthStateChanged(auth, async (user) => {
         const profileLink = userRole === 'company' ? 'company-profile.html' : 'profile.html';
 
         headerHtml = `
-            <div class="flex items-center h-16 relative">
-                <!-- Left: Logo -->
+            <div class="flex items-center h-20 relative">
+                <!-- Left: Logo Image -->
                 <div class="flex-none">
-                     <a class="flex items-center space-x-2" href="${dashboardLink}">
-                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
-                        <span class="text-xl font-bold text-foreground">InternConnect</span>
+                     <a class="flex items-center" href="${dashboardLink}">
+                        <span class="logo-wrap"><img src="assets/icons/text-logo.png" alt="InternConnect" class="h-12 w-auto" /></span>
                     </a>
                 </div>
 
                 <!-- Middle: Nav + User -->
                 <div class="flex-grow flex justify-center">
                     <div class="hidden md:flex items-center space-x-8">
-                         <nav class="flex items-center space-x-8">
-                            <a class="nav-link ${currentPage === 'jobs.html' ? 'text-primary' : ''}" href="jobs.html">Jobs</a>
-                            <a class="nav-link ${currentPage === 'companies.html' ? 'text-primary' : ''}" href="companies.html">Companies</a>
-                            <a class="nav-link ${currentPage === 'resources.html' ? 'text-primary' : ''}" href="resources.html">Resources</a>
-                            <a class="nav-link ${currentPage === 'about.html' ? 'text-primary' : ''}" href="about.html">About</a>
-                            <a class="nav-link ${currentPage === 'contact.html' ? 'text-primary' : ''}" href="contact.html">Contact</a>
+                        <nav class="flex items-center space-x-8">
+                            <a class="nav-link ${currentPage === 'jobs.html' ? 'active' : ''}" ${currentPage === 'jobs.html' ? 'aria-current="page"' : ''} href="jobs.html">Jobs</a>
+                            <a class="nav-link ${currentPage === 'companies.html' ? 'active' : ''}" ${currentPage === 'companies.html' ? 'aria-current="page"' : ''} href="companies.html">Companies</a>
+                            <a class="nav-link ${currentPage === 'resources.html' ? 'active' : ''}" ${currentPage === 'resources.html' ? 'aria-current="page"' : ''} href="resources.html">Resources</a>
+                            <a class="nav-link ${currentPage === 'about.html' ? 'active' : ''}" ${currentPage === 'about.html' ? 'aria-current="page"' : ''} href="about.html">About</a>
+                            <a class="nav-link ${currentPage === 'contact.html' ? 'active' : ''}" ${currentPage === 'contact.html' ? 'aria-current="page"' : ''} href="contact.html">Contact</a>
                         </nav>
                         <a href="${profileLink}" class="nav-link flex items-center space-x-2 font-semibold">
                             <span>${displayName}</span>
@@ -74,17 +73,16 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // User is not logged in
         headerHtml = `
-             <div class="flex justify-between items-center h-16">
-                <a class="flex items-center space-x-2" href="index.html">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">IC</span></div>
-                    <span class="text-xl font-bold text-foreground">InternConnect</span>
+             <div class="flex justify-between items-center h-20">
+                <a class="flex items-center" href="index.html">
+                    <span class="logo-wrap"><img src="assets/icons/text-logo.png" alt="InternConnect" class="h-12 w-auto" /></span>
                 </a>
                 <nav class="hidden md:flex items-center space-x-8">
-                    <a class="nav-link" href="jobs.html">Jobs</a>
-                    <a class="nav-link" href="companies.html">Companies</a>
-                    <a class="nav-link" href="resources.html">Resources</a>
-                    <a class="nav-link" href="about.html">About</a>
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link ${currentPage === 'jobs.html' ? 'active' : ''}" ${currentPage === 'jobs.html' ? 'aria-current="page"' : ''} href="jobs.html">Jobs</a>
+                    <a class="nav-link ${currentPage === 'companies.html' ? 'active' : ''}" ${currentPage === 'companies.html' ? 'aria-current="page"' : ''} href="companies.html">Companies</a>
+                    <a class="nav-link ${currentPage === 'resources.html' ? 'active' : ''}" ${currentPage === 'resources.html' ? 'aria-current="page"' : ''} href="resources.html">Resources</a>
+                    <a class="nav-link ${currentPage === 'about.html' ? 'active' : ''}" ${currentPage === 'about.html' ? 'aria-current="page"' : ''} href="about.html">About</a>
+                    <a class="nav-link ${currentPage === 'contact.html' ? 'active' : ''}" ${currentPage === 'contact.html' ? 'aria-current="page"' : ''} href="contact.html">Contact</a>
                 </nav>
                 <div class="flex items-center space-x-3">
                      <a href="auth.html" class="nav-link font-semibold">Sign In</a>
@@ -96,6 +94,48 @@ onAuthStateChanged(auth, async (user) => {
 
     if(headerContent) {
         headerContent.innerHTML = headerHtml;
+    }
+
+    // Ensure favicon is present in the document head (for pages that load this header)
+    try {
+        (function ensureFavicon() {
+            try {
+                // Resolve the favicon path relative to the current document so it works
+                // both when served and when opened via file://
+                const faviconHref = new URL('assets/icons/favicon.png', document.baseURI).href;
+                if (!document.querySelector('link[rel~="icon"]')) {
+                    const l = document.createElement('link');
+                    l.rel = 'icon';
+                    l.type = 'image/png';
+                    l.href = faviconHref;
+                    document.head.appendChild(l);
+                }
+                if (!document.querySelector('link[rel="shortcut icon"]')) {
+                    const s = document.createElement('link');
+                    s.rel = 'shortcut icon';
+                    s.href = faviconHref;
+                    document.head.appendChild(s);
+                }
+                if (!document.querySelector('link[rel="apple-touch-icon"]')) {
+                    const at = document.createElement('link');
+                    at.rel = 'apple-touch-icon';
+                    at.href = faviconHref;
+                    document.head.appendChild(at);
+                }
+            } catch (e) {
+                // ignore errors when modifying head
+            }
+        })();
+
+        // Set a page identifier on the body so the background manager can pick a style
+        const pageId = (currentPage || 'index').replace('.html','').toLowerCase();
+        if (document && document.body) document.body.dataset.page = pageId;
+        // Dynamically load the background manager (best-effort)
+        import('./bg-manager.js').then(m => {
+            try { m.default && m.default(); } catch (e) { /* ignore */ }
+        }).catch(()=>{/* ignore if module missing */});
+    } catch(e) {
+        // ignore
     }
 
     if (user) {

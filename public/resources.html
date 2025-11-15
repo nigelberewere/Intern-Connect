@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Career Resources | InternConnect</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use locally-built Tailwind CSS in production. Build with `npm run build:css`. -->
+    <link rel="stylesheet" href="tailwind.css?v=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,22 +34,22 @@
                     <h2 class="text-2xl font-bold text-foreground mb-6">Featured Resources</h2>
                     <div class="grid md:grid-cols-3 gap-6">
                         <!-- Featured Card 1 -->
-                        <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 animate-on-scroll animate-slide-in-up">
+                        <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-50 to-teal-50 border border-indigo-100 animate-on-scroll animate-slide-in-up">
                             <h3 class="text-xl font-bold text-foreground mb-2">Interview Mastery Course</h3>
                             <p class="text-sm text-foreground/70 mb-4">Complete guide to acing technical and behavioral interviews.</p>
-                            <a href="#" class="btn btn-primary w-full !rounded-lg">Start Learning</a>
+                            <a href="https://grow.google/intl/ssa-en/" class="btn btn-primary w-full !rounded-lg">Start Learning</a>
                         </div>
                         <!-- Featured Card 2 -->
                         <div class="p-6 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-100 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.1s;">
                             <h3 class="text-xl font-bold text-foreground mb-2">Resume Templates</h3>
                             <p class="text-sm text-foreground/70 mb-4">Professional templates for different industries and roles.</p>
-                            <a href="#" class="btn btn-secondary w-full !rounded-lg">Download Now</a>
+                            <button id="featured-resume-cta" class="btn btn-secondary w-full !rounded-lg">Browse Templates</button>
                         </div>
                         <!-- Featured Card 3 -->
                         <div class="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-100 animate-on-scroll animate-slide-in-up" style="animation-delay: 0.2s;">
                             <h3 class="text-xl font-bold text-foreground mb-2">Career Roadmaps</h3>
                             <p class="text-sm text-foreground/70 mb-4">Step-by-step guides for different career paths in tech.</p>
-                            <a href="#" class="btn btn-secondary w-full !rounded-lg">Explore Paths</a>
+                            <a href="https://learn.microsoft.com/en-us/training/career-paths/" class="btn btn-secondary w-full !rounded-lg">Explore Paths</a>
                         </div>
                     </div>
                 </div>
@@ -149,6 +150,28 @@
     <script type="module" src="auth-header.js"></script>
     <script type="module" src="resources.js"></script>
     <script src="animations.js" defer></script>
+    <script>
+    // Featured CTA: scroll to resources and pre-filter for resume templates.
+    document.addEventListener('DOMContentLoaded', function () {
+        const cta = document.getElementById('featured-resume-cta');
+        if (!cta) return;
+        cta.addEventListener('click', function (e) {
+            e.preventDefault();
+            const cat = document.getElementById('category-filter');
+            const type = document.getElementById('type-filter');
+            if (cat) {
+                cat.value = 'resume';
+                cat.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            if (type) {
+                type.value = 'Template';
+                type.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            const container = document.getElementById('resources-container');
+            if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    </script>
 
 </body>
 </html>

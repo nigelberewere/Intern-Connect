@@ -1,8 +1,9 @@
 /* --- Global & Variables --- */
 :root {
-    --primary: #6a5af9;
-    --primary-light: #8b7ffc;
-    --primary-dark: #4b32f8;
+    /* Green / Blue theme */
+    --primary: #05ad29; /* primary green */
+    --primary-light: #4fe76a; /* lighter green */
+    --primary-dark: #04791e; /* darker green */
     --background: #f7f5ff;
     --foreground: #1e293b;
     --card-bg: #ffffff;
@@ -18,6 +19,11 @@ body {
     line-height: 1.6;
 }
 
+/* Make sizing predictable so 100% widths include padding/border */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* --- Authentication Page Styles --- */
 .auth-body {
     display: flex;
@@ -28,21 +34,16 @@ body {
     background-color: #0a0528;
 }
 
-.auth-video-bg {
+.auth-bg-canvas {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
-    transform: translate(-50%, -50%);
-    filter: blur(8px);
-}
-
-#auth-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    z-index: -3;
+    pointer-events: none;
+    /* reduce blur and boost saturation so the pattern is more visible */
+    filter: blur(0px) saturate(40%);
 }
 
 .auth-body::after {
@@ -52,8 +53,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 5, 40, 0.7);
-    z-index: -1;
+    /* slight overlay to darken bg while allowing canvas visibility */
+    /* lower alpha so canvas colors show through more strongly */
+    background-color: rgba(10, 5, 40, 0.25);
+    z-index: -2;
 }
 
 
@@ -128,19 +131,30 @@ body {
     text-align: center;
 }
 
+/* Mobile-only toggles are hidden by default (desktop) */
+.mobile-toggle { display: none; }
+
 .auth-input {
-    background-color: #f3f4f6;
-    border: 1px solid transparent;
+    background-color: #ffffff;
+    border: 1px solid var(--card-border);
     padding: 0.75rem 1rem;
     margin: 0.5rem 0;
     width: 100%;
+    max-width: 100%;
     border-radius: 0.5rem;
-    transition: all 0.2s;
+    transition: all 0.18s ease;
+    color: var(--foreground);
+    box-shadow: inset 0 1px 2px rgba(16,24,40,0.03);
 }
 .auth-input:focus {
     outline: none;
-    border-color: var(--primary-light);
+    border-color: var(--primary);
     background-color: #fff;
+    box-shadow: 0 0 0 6px rgba(5,173,41,0.06);
+}
+
+.auth-input::placeholder {
+    color: #9ca3af; /* slightly darker placeholder for readability */
 }
 
 
@@ -155,6 +169,45 @@ body {
     width: 968px;
     max-width: 100%;
     min-height: 620px;
+}
+
+/* Back button inside auth tile */
+    .auth-back-btn {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 300;
+        background: var(--primary); /* visible on white and dark backgrounds */
+        color: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        padding: 0.35rem 0.6rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .auth-back-btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(5,173,41,0.08); }
+
+@media (max-width: 768px) {
+    .auth-back-btn {
+        /* contrast for light container on mobile */
+        background: transparent;
+        color: var(--foreground);
+        border: 1px solid var(--card-border);
+        top: 0.6rem;
+        left: 0.6rem;
+    }
+
+    /* Move back button out of the tile to top-left of viewport on small screens */
+    .auth-back-btn {
+        position: fixed;
+        top: calc(env(safe-area-inset-top, 0px) + 0.6rem);
+        left: calc(env(safe-area-inset-left, 0px) + 0.6rem);
+        background: rgba(10, 5, 40, 0.9);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.06);
+        box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+        z-index: 9999;
+    }
 }
 
 .form-container {
@@ -341,14 +394,14 @@ select.filter-input {
     outline: none;
     border-color: var(--primary);
     background-color: white;
-    box-shadow: 0 0 0 2px rgba(106, 90, 249, 0.2);
+    box-shadow: 0 0 0 2px rgba(5, 173, 41, 0.2);
 }
 
 
 /* --- General Site Styles --- */
 .hero-gradient {
     background-color: var(--background);
-    background-image: radial-gradient(circle at top right, #e0e7ff 0%, var(--background) 50%);
+    background-image: radial-gradient(circle at top right, rgba(52,211,153,0.08) 0%, var(--background) 50%);
 }
 
 .section-title {
@@ -388,7 +441,7 @@ select.filter-input {
 .btn-primary {
     background-color: var(--primary);
     color: white;
-    box-shadow: 0 4px 14px 0 rgba(106, 90, 249, 0.39);
+    box-shadow: 0 4px 14px 0 rgba(5, 173, 41, 0.39);
 }
 .btn-primary:hover {
     background-color: var(--primary-dark);
@@ -414,6 +467,25 @@ select.filter-input {
 .nav-link:hover {
     color: var(--primary);
     opacity: 1;
+}
+/* Active page indicator for header nav */
+.nav-link {
+    position: relative;
+}
+.nav-link.active {
+    color: var(--primary);
+    font-weight: 700;
+    opacity: 1;
+}
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 4px;
 }
 .footer-link {
      font-size: 0.875rem;
@@ -477,7 +549,7 @@ select.filter-input {
 .status-green { background-color: #d1fae5; color: #065f46; }
 .status-gray { background-color: #f3f4f6; color: #374151; }
 .status-red { background-color: #fee2e2; color: #991b1b; }
-.status-purple { background-color: #ede9fe; color: #5b21b6; }
+.status-purple { background-color: #ecfdf5; color: #065f46; }
 
 
 /* --- Animations & Loader --- */
@@ -574,7 +646,7 @@ select.filter-input {
 .input:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(106, 90, 249, 0.2);
+    box-shadow: 0 0 0 2px rgba(5, 173, 41, 0.2);
 }
 
 .skill-badge {
@@ -589,10 +661,14 @@ select.filter-input {
 /* --- Responsive adjustments for Authentication page (mobile) --- */
 @media (max-width: 768px) {
     .auth-body {
-        align-items: flex-start;
-        padding-top: 2rem;
-        height: auto;
-        overflow: auto;
+        /* Center tile vertically and horizontally on mobile */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 0;
+        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
     }
 
     .auth-video-bg {
@@ -601,10 +677,11 @@ select.filter-input {
 
     .auth-container {
         width: calc(100% - 2rem);
+        max-width: 520px;
         min-height: auto;
         border-radius: 1rem;
         padding: 0.5rem;
-        margin: 0 1rem 2rem 1rem;
+        margin: 0 auto;
         box-shadow: none;
         border: none;
         background-color: rgba(255,255,255,0.03);
@@ -635,6 +712,14 @@ select.filter-input {
         border-radius: 0.75rem;
     }
 
+    /* Mobile: show only one form at a time to avoid confusion */
+    .sign-in-container { display: block; }
+    .sign-up-container { display: none; }
+
+    /* When toggled via JS (right-panel-active) swap which form is visible */
+    .auth-container.right-panel-active .sign-in-container { display: none; }
+    .auth-container.right-panel-active .sign-up-container { display: block; }
+
     .auth-form {
         padding: 1.5rem;
         text-align: left;
@@ -662,6 +747,28 @@ select.filter-input {
     .overlay {
         display: none;
     }
+
+    /* Mobile-only toggle link shown inside each form */
+    .mobile-toggle {
+        display: flex; /* show on small screens */
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.75rem;
+        text-align: center;
+        font-size: 0.95rem;
+        color: #475569;
+        gap: 0.35rem;
+    }
+    .auth-toggle-link {
+        background: transparent;
+        border: none;
+        color: var(--primary);
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 0.35rem;
+    }
+    .auth-toggle-link:focus { outline: none; }
 }
 
 @media (max-width: 420px) {
@@ -669,4 +776,282 @@ select.filter-input {
     .auth-input { padding: 0.6rem 0.75rem; }
     .auth-button { padding: 0.55rem 0.75rem; }
     .auth-form { padding: 1rem; }
+    
+/* --- Merged companies.css (kept below to override defaults when needed) --- */
+/* Video background and page overlay for companies page */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(247, 245, 255, 0.7); /* Reduced overlay opacity */
+    z-index: -1;
 }
+
+.video-background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#page-content {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background and overlay */
+}
+
+/* Job & Company page helpers */
+.filter-input {
+    width: 100%;
+    height: 3rem;
+    padding: 0 1rem;
+    background-color: #fdfcff; 
+    border-radius: 0.75rem;
+    border: 1px solid var(--card-border);
+    transition: all 0.2s ease-in-out;
+    font-size: 0.875rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select.filter-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(5, 173, 41, 0.2);
+}
+
+/* Ensure companies-specific logo wrapper still present (already added globally) */
+/* Section titles and buttons (duplicates may override global rules where needed) */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--foreground);
+    margin-bottom: 1rem;
+}
+.section-subtitle {
+    font-size: 1.125rem;
+    color: #5a6474;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+/* footer and misc helpers kept from companies.css */
+.footer-link {
+     font-size: 0.875rem;
+     color: #4a5568;
+     transition: color 0.2s;
+}
+.footer-link:hover {
+    color: var(--primary);
+}
+
+/* status badges */
+.status-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+}
+
+/* Logo wrapper: rounded border with accent on hover/focus */
+.logo-wrap {
+    display: inline-block;
+    padding: 6px;
+    border-radius: 0.75rem;
+    border: 2px solid transparent;
+    transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.15s ease;
+}
+.logo-wrap {
+    display: inline-block;
+    padding: 0px;
+    border-radius: 0.75rem;
+    border: 2px solid rgba(5,173,41,0.14); /* visible but subtle by default */
+    transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.15s ease;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    z-index: 1; /* ensure wrapper sits above header background so glow shows */
+}
+.logo-wrap img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: 56px; /* constrain tall logo to a reasonable header height */
+    position: relative;
+    z-index: 2; /* place image above the glow pseudo-element */
+}
+.logo-wrap:hover,
+.logo-wrap:focus-within {
+    border-color: rgba(5,173,41,0.0); /* hide solid border while showing animated glow */
+    transform: translateY(-2px);
+}
+.logo-wrap:focus-within { outline: none; }
+
+/* Animated gradient glow behind the logo on hover */
+.logo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    z-index: 0; /* behind the image but above the header background */
+    border-radius: calc(0.75rem + 6px);
+    background: linear-gradient(90deg, rgba(5,173,41,0.95), rgba(80,216,120,0.85));
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.98);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    background-size: 200% 200%;
+}
+.logo-wrap:hover::after,
+.logo-wrap:focus-within::after {
+    opacity: 0.8; /* match header bg opacity (bg-white/80) for visual parity */
+    transform: scale(1);
+    animation: logoGradientShift 3s linear infinite;
+}
+
+@keyframes logoGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Page background canvas common styling */
+.page-bg-canvas {
+    opacity: 1;
+    transition: opacity 280ms ease;
+    will-change: transform, opacity;
+}
+
+/* Per-section canvas background */
+.section-bg-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0; /* place above the section background but below content */
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: inherit;
+}
+
+/* Ensure section children render above the canvas */
+section[data-bg] > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Apply About page section/canvas backgrounds to Resources page */
+body[data-page="resources"] .page-bg-canvas,
+body[data-page="resources"] .section-bg-canvas {
+    /* make sure page/section canvases are visible and non-interactive */
+    opacity: 1;
+    pointer-events: none;
+    mix-blend-mode: normal;
+    /* place the page canvas above any body overlays but beneath page content (#page-content z-index:1) */
+    z-index: 0;
+}
+
+/* Ensure Resources page sections using data-bg behave like About page */
+body[data-page="resources"] section[data-bg] {
+    position: relative;
+    overflow: hidden;
+    background-clip: padding-box;
+}
+
+body[data-page="resources"] section[data-bg] > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Apply About page section/canvas backgrounds to Companies page */
+body[data-page="companies"] .page-bg-canvas,
+body[data-page="companies"] .section-bg-canvas {
+    /* make sure page/section canvases are visible and non-interactive */
+    opacity: 1;
+    pointer-events: none;
+    mix-blend-mode: normal;
+    /* place canvas above body overlays but beneath page content */
+    z-index: 0;
+}
+
+/* Ensure Companies page sections using data-bg behave like About page */
+body[data-page="companies"] section[data-bg] {
+    position: relative;
+    overflow: hidden;
+    background-clip: padding-box;
+}
+
+body[data-page="companies"] section[data-bg] > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Section green shades (decreasing intensity down the page) */
+.section-green-1 { background-color: rgba(5,173,41,0.06); }
+.section-green-2 { background-color: rgba(5,173,41,0.045); }
+.section-green-3 { background-color: rgba(5,173,41,0.03); }
+.section-green-4 { background-color: rgba(5,173,41,0.02); }
+
+/* CSS pattern utilities — combine with .section-green-* for layered visuals */
+.pattern-stripes {
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 18px, rgba(255,255,255,0) 18px 36px);
+    background-blend-mode: overlay;
+}
+.pattern-dots {
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+    background-blend-mode: overlay;
+}
+.pattern-grid {
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-blend-mode: overlay;
+}
+.pattern-waves {
+    background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.04), transparent 25%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03), transparent 30%);
+    background-blend-mode: overlay;
+}
+
+/* Ensure patterns and canvas layer correctly inside sections */
+section[class*="section-green-"] { position: relative; overflow: hidden; }
+section[class*="section-green-"] > * { position: relative; z-index: 1; }
+

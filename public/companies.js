@@ -68,11 +68,12 @@ function createCompanyCard(companyData, index) {
     const { id, companyName, industry, location, logoUrl, description } = companyData;
     const delay = index * 100;
     
+    const placeholder = 'https://placehold.co/64x64/05AD29/FFFFFF?text=Logo';
     return `
         <div class="animate-on-scroll animate-slide-in-up" style="animation-delay: ${delay}ms;">
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 border flex flex-col h-full">
                 <div class="flex items-start space-x-4 mb-4">
-                    <img class="w-16 h-16 rounded-xl bg-gray-100 object-contain" src="${logoUrl || 'https://placehold.co/64x64/E0E7FF/4F46E5?text=Logo'}" alt="${companyName} Logo">
+                    <img class="w-16 h-16 rounded-xl bg-gray-100 object-contain" src="${logoUrl || placeholder}" alt="${companyName} Logo">
                     <div class="flex-1">
                         <h3 class="text-lg font-bold text-foreground truncate">${companyName}</h3>
                         <p class="text-sm text-foreground/70">${industry || 'N/A'}</p>

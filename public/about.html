@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | InternConnect</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use locally-built Tailwind CSS in production. Build with `npm run build:css`. -->
+    <link rel="stylesheet" href="tailwind.css?v=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=1.6">
+    
     
 </head>
 <body class="bg-background">
@@ -24,7 +26,7 @@
         <!-- Main Content -->
         <main class="flex-grow">
             <!-- Hero Section -->
-            <section class="py-24 px-4 text-center">
+            <section class="py-24 px-4 text-center" data-bg="hero">
                 <div class="max-w-4xl mx-auto animate-on-scroll animate-fade-in">
                     <h1 class="text-4xl md:text-6xl font-extrabold text-foreground mb-6">Connecting Dreams with Opportunities</h1>
                     <p class="section-subtitle">InternConnect was born from a simple belief: every student deserves access to meaningful internship opportunities. We're building the bridge between talented students and innovative companies.</p>
@@ -32,7 +34,7 @@
             </section>
 
             <!-- Mission & Values Section -->
-            <section class="py-24 px-4 bg-white">
+            <section class="py-24 px-4 bg-white" data-bg="mission">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-16 animate-on-scroll animate-slide-in-up">
                         <h2 class="section-title">Our Mission & Values</h2>
@@ -64,7 +66,7 @@
             </section>
 
             <!-- Team Section -->
-            <section class="py-24 px-4">
+            <section class="py-24 px-4" data-bg="team">
                 <div class="max-w-7xl mx-auto">
                      <div class="text-center mb-16 animate-on-scroll animate-slide-in-up">
                         <h2 class="section-title">Meet Our Team</h2>
@@ -73,17 +75,17 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
                         <!-- Team Member Card -->
                         <div class="card text-center p-6 flex flex-col items-center animate-on-scroll animate-slide-in-up">
-                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/E0E7FF/4F46E5?text=NB" alt="Nigel Berewere">
+                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/05AD29/FFFFFF?text=NB" alt="Nigel Berewere">
                             <h3 class="text-lg font-bold text-foreground mb-1">Nigel Berewere</h3>
                             <p class="text-sm text-primary font-medium mb-3">CEO & Founder</p>
                             <p class="text-xs text-foreground/60 mb-4 flex-grow">Visionary leader driving the future of student careers.</p>
-                            <a href="#" target="_blank" class="mt-auto text-gray-400 hover:text-blue-600 transition-colors">
+                            <a href="https://www.linkedin.com/in/nigelberewere" target="_blank" class="mt-auto text-gray-400 hover:text-blue-600 transition-colors">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
                             </a>
                         </div>
                          <!-- Team Member Card -->
                         <div class="card text-center p-6 flex flex-col items-center animate-on-scroll animate-slide-in-up" style="animation-delay: 0.1s;">
-                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/E0E7FF/4F46E5?text=TB" alt="Tanatswa Bhunu">
+                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/05AD29/FFFFFF?text=TB" alt="Tanatswa Bhunu">
                             <h3 class="text-lg font-bold text-foreground mb-1">Tanatswa Bhunu</h3>
                             <p class="text-sm text-primary font-medium mb-3">Chief Operating Officer</p>
                             <p class="text-xs text-foreground/60 mb-4 flex-grow">Expert in operational excellence and strategic planning.</p>
@@ -93,7 +95,7 @@
                         </div>
                          <!-- Team Member Card -->
                         <div class="card text-center p-6 flex flex-col items-center animate-on-scroll animate-slide-in-up" style="animation-delay: 0.2s;">
-                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/E0E7FF/4F46E5?text=TM" alt="Tanaka Mugugu">
+                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/05AD29/FFFFFF?text=TM" alt="Tanaka Mugugu">
                             <h3 class="text-lg font-bold text-foreground mb-1">Tanaka Mugugu</h3>
                             <p class="text-sm text-primary font-medium mb-3">Head of Design</p>
                             <p class="text-xs text-foreground/60 mb-4 flex-grow">Creative mind behind our user-friendly platform experience.</p>
@@ -103,7 +105,7 @@
                         </div>
                          <!-- Team Member Card -->
                         <div class="card text-center p-6 flex flex-col items-center animate-on-scroll animate-slide-in-up" style="animation-delay: 0.3s;">
-                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/E0E7FF/4F46E5?text=PM" alt="Priatah Mukuche">
+                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/05AD29/FFFFFF?text=PM" alt="Priatah Mukuche">
                             <h3 class="text-lg font-bold text-foreground mb-1">Priatah Mukuche</h3>
                             <p class="text-sm text-primary font-medium mb-3">Marketing Lead</p>
                             <p class="text-xs text-foreground/60 mb-4 flex-grow">Connecting our brand with students and companies worldwide.</p>
@@ -113,11 +115,11 @@
                         </div>
                         <!-- Team Member Card -->
                         <div class="card text-center p-6 flex flex-col items-center animate-on-scroll animate-slide-in-up" style="animation-delay: 0.4s;">
-                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/E0E7FF/4F46E5?text=CM" alt="Clever Mukondiwa">
+                            <img class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" src="https://placehold.co/96x96/05AD29/FFFFFF?text=CM" alt="Clever Mukondiwa">
                             <h3 class="text-lg font-bold text-foreground mb-1">Clever Mukondiwa</h3>
                             <p class="text-sm text-primary font-medium mb-3">Lead Developer</p>
                             <p class="text-xs text-foreground/60 mb-4 flex-grow">The engineering talent building our robust platform.</p>
-                             <a href="#" target="_blank" class="mt-auto text-gray-400 hover:text-blue-600 transition-colors">
+                             <a href="https://www.linkedin.com/in/clever-bvuma-16a993282/" target="_blank" class="mt-auto text-gray-400 hover:text-blue-600 transition-colors">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
                             </a>
                         </div>
@@ -170,6 +172,7 @@
     </div>
     
     <script type="module" src="auth-header.js"></script>
+    <script type="module" src="section-bg.js" defer></script>
     <script src="animations.js" defer></script>
 
 </body>
