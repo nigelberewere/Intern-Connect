@@ -31,7 +31,8 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    background-color: #0a0528;
+    /* Updated to theme green gradient (replaces previous purple background) */
+    background: linear-gradient(180deg, #071b0f 0%, #052a16 100%);
 }
 
 .auth-bg-canvas {
@@ -43,7 +44,7 @@ body {
     z-index: -3;
     pointer-events: none;
     /* reduce blur and boost saturation so the pattern is more visible */
-    filter: blur(0px) saturate(40%);
+    filter: blur(0.6px) saturate(150%);
 }
 
 .auth-body::after {
@@ -53,9 +54,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* slight overlay to darken bg while allowing canvas visibility */
-    /* lower alpha so canvas colors show through more strongly */
-    background-color: rgba(10, 5, 40, 0.25);
+    /* subtle green overlay matching theme */
+    background-color: rgba(5, 173, 41, 0.08);
     z-index: -2;
 }
 
